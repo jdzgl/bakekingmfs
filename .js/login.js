@@ -18,7 +18,7 @@ onAuthStateChanged(auth, async (user) => {
                 if (isAdmin && !currentPage.includes("admin-dashboard.html")) {
                     window.location.href = "admin-dashboard.html";
                 } else if (!isAdmin && (currentPage.includes("login.html") || currentPage.includes("register.html"))) {
-                    window.location.href = "homepage.html";
+                    window.location.href = "index.html";
                 }
             }
         } catch (error) {

@@ -5,7 +5,7 @@ import { showToast } from './toast-util.js';
 
 onAuthStateChanged(auth, (user) => {
     if (user && user.emailVerified) {
-        window.location.href = "homepage.html";
+        window.location.href = "index.html";
     }
 });
 
