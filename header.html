@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King Header</title>
+
+    <link rel="stylesheet" href=".css/global.css">
+    <link rel="stylesheet" href=".css/header.css">
+    <script type="module" src=".js/auth-check.js"></script>
+    <script type="module" src=".js/header.js"></script>
+    <script type="module" src=".js/notifications.js"></script>
+</head>
+<body>
+    <header>
+        <div class="notification-content" id="notificationBar">
+            <span>
+                Create an account to access all features.
+                <a class="notification-cta" href="register.html">Sign up now.</a>
+            </span>
+        </div>
+        <div class="header-container">
+            <button class="mobile-menu-btn"
+                    id="hamburgerBtn"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="navSidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="homepage.html" class="logo">
+                <img class="logo-img" src="assets/icons/logo-nobg.png" alt="Bake King Logo"
+                     onerror="this.style.display='none'">
+                <span class="logo-text">BAKE KING</span>
+            </a>
+            <nav aria-label="Main navigation">
+                <ul class="desktop-nav" id="desktopNav">
+                    <li><a href="order-now.html"       class="nav-link">Order Now</a></li>
+                    <li><a href="how-to-order.html"    class="nav-link">How to Order</a></li>
+                    <li><a href="faqs-about.html"      class="nav-link">FAQs</a></li>
+                    <li><a href="contact-services.html" class="nav-link">Contact Us</a></li>
+                </ul>
+            </nav>
+            <section class="cart-prof">
+                <a href="shopping-cart.html" class="cart-wrapper" aria-label="Shopping cart">
+                    <img class="cart-icon" src="assets/icons/shopping-cart.png" alt="Cart">
+                    <span class="cart-count-badge" id="cartBadge" style="display:none;">0</span>
+                </a>
+                <a href="notifications.html" class="custNotifBtn" aria-label="Notifications">
+                    <img class="notif-icon" src="assets/icons/notification.png" alt="Notif">
+                    <span class="notif-badge" id="custNotifBadge" style="display: none;">0</span>
+                </a>
+                <a href="profile.html" class="user-profile" aria-label="My profile">
+                    <img class="prof-icon" src="assets/icons/user.png" alt="Profile">
+                </a>
+            </section>
+        </div>
+    </header>
+    <aside id="navSidebar"
+           class="sidebar-drawer"
+           aria-label="Mobile navigation"
+           aria-hidden="true">
+        <div class="sidebar-head">
+            <span class="sidebar-logo-text">BAKE KING</span>
+            <button id="closeSidebarBtn"
+                    class="sidebar-close-btn"
+                    aria-label="Close menu">
+                &times;
+            </button>
+        </div>
+        <div id="sidebarLoginBlock" class="sidebar-login-block" style="display:none;">
+            <a href="login.html" class="sidebar-login-btn">LOG IN</a>
+            <a href="register.html" class="sidebar-login-btn">Create Account</a>
+        </div>
+        <div id="sidebarUserBlock" class="sidebar-user-block" style="display:none;">
+            <img src="assets/icons/user.png" class="sidebar-user-avatar" alt="User"
+                 onerror="this.style.display='none'">
+            <span id="sidebarUserName" class="sidebar-user-name">Hello!</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="order-now.html"         class="sidebar-link">Order Now</a>
+            <a href="how-to-order.html"     class="sidebar-link">How to Order</a>
+            <a href="faqs-about.html"       class="sidebar-link">FAQs</a>
+            <a href="contact-services.html" class="sidebar-link">Contact Us</a>
+            <div class="sidebar-divider"></div>
+            <a href="notifications.html"    class="sidebar-link">
+                Notifications
+                <span class="sidebar-notif-count" id="sidebarNotifCount" style="display:none;">0</span>
+            </a>
+            <a href="profile.html"          class="sidebar-link">My Profile</a>
+            <a href="shopping-cart.html"    class="sidebar-link">
+                My Cart
+                <span class="sidebar-cart-count" id="sidebarCartCount" style="display:none;">0</span>
+            </a>
+            <a href="current-orders.html"   class="sidebar-link">My Orders</a>
+            <a href="order-history.html"    class="sidebar-link">Order History</a>
+            <div class="sidebar-divider" id="logoutDivider" style="display:none;"></div>
+            <button id="sidebarLogoutBtn"
+                    class="sidebar-link sidebar-logout-btn"
+                    style="display:none;">
+                Log Out
+            </button>
+        </nav>
+    </aside>
+    <div id="sidebarOverlay" class="sidebar-overlay" aria-hidden="true"></div>
+</body>
+</html>

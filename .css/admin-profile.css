@@ -1,0 +1,319 @@
+:root {
+    --primary-orange: #FF8800;
+    --light-beige: #FFF5E1;
+    --dark-brown: #2B1410;
+    --beige: #F5E6CC;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.2s ease-out;
+}
+
+body {
+    background: var(--light-beige);
+    font-family: 'Satoshi', sans-serif;
+    color: var(--dark-brown);
+}
+
+.aprof-main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 100px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aprof-title {
+    font-family: 'Integral-CF-Bold', sans-serif;
+    font-size: clamp(32px, 6vw, 54px);
+    color: var(--dark-brown);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.aprof-avatar-wrap {
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.aprof-avatar {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    background: var(--white);
+    border: 4px solid var(--dark-brown);
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+}
+
+.aprof-columns {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.aprof-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.aprof-section-title {
+    font-family: 'Integral-CF-Bold', sans-serif;
+    font-size: 24px;
+    color: var(--primary-orange);
+    letter-spacing: 0.5px;
+}
+
+.aprof-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.aprof-field-label {
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-size: 14px;
+    color: var(--primary-orange);
+    margin-left: 2px;
+}
+
+.aprof-field-box {
+    background: var(--white);
+    border: 2px solid var(--primary-orange);
+    border-radius: 12px;
+    padding: 15px 20px;
+    position: relative;
+    box-shadow: 0 4px 0px rgba(255, 136, 0, 0.1);
+}
+
+.aprof-field-box-readonly {
+    background: var(--beige);
+    border-color: rgba(43, 20, 16, 0.2);
+}
+
+.aprof-field-hint {
+    display: block;
+    font-family: 'Satoshi';
+    font-style: italic;
+    font-size: 12px;
+    color: var(--primary-orange);
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.aprof-field-value-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.aprof-field-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-size: 16px;
+    color: var(--dark-brown);
+    outline: none;
+    width: 100%;
+}
+
+.aprof-field-input:disabled {
+    cursor: default;
+}
+
+.aprof-edit-btn {
+    background: var(--primary-orange);
+    border: 2px solid var(--dark-brown);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.aprof-edit-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--white);
+}
+
+.aprof-edit-btn:hover {
+    transform: rotate(-15deg) scale(1.1);
+    background: var(--dark-brown);
+}
+
+.aprof-edit-btn-disabled {
+    background: #ccc;
+    border-color: #999;
+    cursor: not-allowed;
+}
+
+.aprof-edit-btn-disabled:hover {
+    transform: none;
+}
+
+.aprof-role-section {
+    margin-bottom: 30px;
+}
+
+.aprof-section-label {
+    font-family: 'Integral-CF-Bold', sans-serif;
+    color: var(--primary-orange);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.aprof-role-container {
+    background: #FFF5E6;
+    margin-top: 20px; 
+    padding: 20px;
+    border-radius: 16px;
+    border: 2px dashed #FF8A00;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aprof-role-badge {
+    background: var(--dark-brown);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 50px;
+    width: fit-content;
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(45, 27, 8, 0.2);
+}
+
+.role-dot {
+    width: 8px;
+    height: 8px;
+    background: #00FF85; 
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00FF85;
+}
+
+.aprof-role-description {
+    font-family: 'Satoshi-Medium', sans-serif;
+    font-size: 0.85rem;
+    color: #8D5524;
+    margin: 0;
+}
+
+.aprof-info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.aprof-info-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--white);
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 5px solid var(--dark-brown);
+}
+
+.aprof-info-icon {
+    font-size: 24px;
+}
+
+.aprof-info-label {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.aprof-info-value {
+    font-family: 'Satoshi-Bold';
+    font-size: 16px;
+}
+
+.aprof-danger-zone {
+    margin-top: 20px;
+}
+
+.aprof-logout-btn {
+    width: 100%;
+    background: var(--dark-brown);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-family: 'Integral-CF-Bold';
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.aprof-logout-btn:hover {
+    background: #cc0000;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 1024px) {
+    .aprof-main { padding-top: 80px; }
+    .aprof-columns { gap: 30px; }
+}
+
+@media (max-width: 768px) {
+    .aprof-columns { grid-template-columns: 1fr; gap: 40px; }
+    .aprof-title { text-align: center; }
+    .aprof-avatar { width: 120px; height: 120px; }
+}
+
+@media (max-width: 480px) {
+    .aprof-main { padding-top: 60px; }
+    .aprof-title { font-size: 28px; }
+    .aprof-avatar { width: 100px; height: 100px; margin-bottom: 30px; }
+    .aprof-section-title, .aprof-section-label { font-size: 20px; text-align: center; }
+    .aprof-field-box { padding: 12px 15px; }
+    .aprof-field-input { font-size: 14px; }
+    .aprof-edit-btn { width: 32px; height: 32px; }
+    .aprof-role-container { align-items: center; text-align: center; }
+    .aprof-info-card { flex-direction: column; text-align: center; padding: 20px; }
+    .aprof-logout-btn { padding: 16px; font-size: 13px; }
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf') format('opentype');
+    font-weight: 300 900; font-display: swap;
+}
+@font-face {
+    font-family: 'Satoshi-Bold';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf') format('opentype');
+    font-weight: 700; font-display: swap;
+}
+@font-face {
+    font-family: 'Integral-CF-Bold';
+    src: url('../assets/fonts/integral-cf/Demo_Fonts/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
+    font-weight: 700; font-display: swap;
+}
+@font-face {
+    font-family: 'Satoshi-Black';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Black.otf') format('opentype');
+    font-weight: 900; font-display: swap;
+}

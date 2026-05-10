@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Admin Shop</title>
+    <link rel="stylesheet" href=".css/admin-dashboard.css">
+    <link rel="stylesheet" href=".css/admin-shop.css">
+    <script type="module" src=".js/inject-admin-header.js"></script>
+    <script type="module" src=".js/admin-header.js"></script>
+    <script type="module" src=".js/admin-shop.js"></script>
+</head>
+<body>
+    <div id="admin-header-placeholder"></div>
+    <main class="adm-shop-main">
+        <div class="adm-page-header">
+            <h1 class="adm-title">SHOP <span class="adm-highlight">CATEGORIES</span></h1>
+            <p class="adm-subtitle">Manage product categories — changes reflect instantly for customers</p>
+        </div>
+        <div class="asc-grid" id="ascGrid"></div>
+    </main>
+    <div class="asc-modal-overlay" id="ascModal">
+        <div class="asc-modal-panel">
+            <button class="asc-modal-close" id="ascModalClose">&times;</button>
+            <h2 class="asc-modal-title" id="ascModalTitle">Edit Category</h2>
+            <div class="asc-form-group">
+                <label>Category ID (Database Link)</label>
+                <input type="text" id="ascCategoryId" placeholder="e.g., Ovens">
+                <p class="asc-upload-note">This ID must match the 'category' field in your products.</p>
+            </div>
+            <div class="asc-form-group">
+                <label>Display Name (Visual)</label>
+                <input type="text" id="ascCategoryName" placeholder="e.g., Gas Ovens">
+            </div>
+            <div class="asc-form-group">
+                <label>CATEGORY IMAGE (DRAG OR CLICK)</label>
+                <div class="asc-drop-zone" id="ascDropZone">
+                    <span class="drop-zone-text">Drag photo here or click to select</span>
+                    <input type="file" id="ascCategoryFile" accept="image/*" style="display: none;">
+                </div>
+                <input type="hidden" id="ascCategoryPath"> 
+                <p id="selectedFileName" style="font-size: 12px; color: #8D5524; margin-top: 5px;"></p>
+            </div>
+            <div class="asc-rename-warning" id="ascRenameWarning">
+                ⚠️ Changing the ID will automatically update the category field for all associated products.
+            </div>
+            <div class="asc-modal-actions">
+                <button class="asc-cancel-btn" id="ascCancelBtn">CANCEL</button>
+                <button class="asc-save-btn" id="ascSaveBtn">SAVE</button>
+            </div>
+        </div>
+    </div>
+    <div class="asc-modal-overlay" id="dfModal" style="display: none; z-index: 2001;">
+        <div class="asc-modal-panel" style="max-width: 600px; width: 95%;">
+            <button class="asc-modal-close" id="dfModalClose" onclick="document.getElementById('dfModal').style.display='none'">&times;</button>
+            <h2 class="asc-modal-title">Manage Delivery Fees</h2>
+            <div class="df-add-section" style="background: rgba(141, 85, 36, 0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px dashed #8D5524;">
+                <h3 style="font-size: 0.9rem; margin-bottom: 10px; color: #2B1410; font-family: 'Satoshi-Black';">ADD NEW LOCATION</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="dfProvinceInput" placeholder="Province (e.g. Cavite)" style="flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #DDD;">
+                        <input type="text" id="dfCityInput" placeholder="City (e.g. Dasmarinas)" style="flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #DDD;">
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="dfFeeInput" placeholder="Fee (₱)" style="flex: 2; padding: 10px; border-radius: 5px; border: 1px solid #DDD;">
+                        <button id="dfAddBtn" style="flex: 1; background: #2B1410; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">ADD</button>
+                    </div>
+                </div>
+            </div>
+            <div id="dfListContainer" style="max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                <p style="text-align: center; opacity: 0.6;">Loading fees...</p>
+            </div>
+            <div class="asc-modal-actions" style="margin-top: 20px;">
+                <button class="asc-save-btn" id="dfDoneBtn" style="width: 100%;" onclick="document.getElementById('dfModal').style.display='none'">DONE</button>
+            </div>
+        </div>
+    </div>
+    <div class="asc-modal-overlay" id="editDfModal" style="display: none; z-index: 2002;">
+        <div class="asc-modal-panel" style="max-width: 400px; width: 90%;">
+            <button class="asc-modal-close" onclick="closeEditModal()">&times;</button>
+            <h2 class="asc-modal-title">Edit Delivery Fee</h2>
+            <p id="editDfLocationName" style="font-weight: bold; color: #8D5524; margin-bottom: 15px;"></p>
+            <div class="asc-form-group">
+                <label>NEW DELIVERY FEE (₱)</label>
+                <input type="number" id="editDfFeeInput" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #DDD;">
+            </div>
+            <div class="asc-modal-actions" style="margin-top: 20px;">
+                <button class="asc-cancel-btn" onclick="closeEditModal()">CANCEL</button>
+                <button class="asc-save-btn" id="saveEditDfBtn">UPDATE FEE</button>
+            </div>
+        </div>
+    </div>
+    <div class="asc-modal-overlay" id="deleteDfModal" style="display: none; z-index: 2003;">
+        <div class="asc-modal-panel" style="max-width: 400px; width: 90%; text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 10px;">⚠️</div>
+            <h2 class="asc-modal-title">Remove Location?</h2>
+            <p id="deleteDfMessage" style="margin-bottom: 20px; color: #666;"></p>
+            <div class="asc-modal-actions" style="flex-direction: column; gap: 10px;">
+                <button class="asc-save-btn" id="confirmDeleteDfBtn" style="background: #D9534F; width: 100%;">YES, DELETE</button>
+                <button class="asc-cancel-btn" onclick="closeDeleteModal()" style="width: 100%;">CANCEL</button>
+            </div>
+        </div>
+    </div>
+    <div id="toast" class="ap-toast"></div>
+</body>
+</html>

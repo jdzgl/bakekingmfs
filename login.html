@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Sign In</title>
+    
+    <link rel="stylesheet" href=".css/login.css">
+    <script type="module" src=".js/login.js"></script> 
+</head>
+<body class="login-page">
+    <main class="login-container">
+        <div class="login-brand">
+            <img src="assets/icons/logo-nobg.png" alt="Bake King Logo" class="large-logo">
+        </div>
+
+        <section class="login-form-card">
+            <h1 class="login-title">LOG IN</h1>
+            <p class="login-subtitle">Please enter your credentials to continue</p>
+
+            <form id="loginForm" action="#" method="POST">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email here" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password here" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember"> Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password</a>
+                </div>
+
+                <p class="terms-link-text">
+                    By logging in, you agree to our 
+                    <a href="javascript:void(0)" id="openTerms">Terms and Conditions</a>.
+                </p>
+
+                <button type="submit" id="loginBtn" class="login-btn disabled" disabled>LOGIN</button>
+            </form>
+
+            <p class="signin-redirect" style="font-family:'Satoshi'; font-size:13px; text-align:center; margin-top:16px; color:var(--dark-brown);">
+                Don't have an account? 
+                <a href="register.html" style="color:var(--primary-orange); font-family:'Satoshi-Bold'; font-weight:700; text-decoration:none;">Sign Up</a>
+            </p>
+        </section>
+    </main>
+
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <h2 class="section-title">TERMS AND <span class="highlight">CONDITIONS</span></h2>
+            <div class="terms-scroll-box">
+                <h3>1. Acceptance of Terms</h3>
+                <p>By accessing Bake King Metal Fabrication Services, you agree to comply with our service standards and purchase policies.</p>
+                
+                <h3>2. Eligibility</h3>
+                <p>
+                    By using this website, you confirm that you are at least eighteen (18) years of age, or that you are using the site under 
+                    the supervision of a parent or legal guardian. We reserve the right to refuse service to anyone at our discretion.
+                </p>
+
+                <h3>3. Products and Pricing</h3>
+                <p>
+                    All product descriptions, images, and prices are subject to change without notice. We make every effort to display accurate 
+                    information; however, we do not warrant that product descriptions or pricing are error-free. In the event of a pricing error, we 
+                    reserve the right to cancel any affected orders.
+                </p>
+
+                <h3>4. Shipping and delivery</h3>
+                <p>
+                    We ship to addresses within the Philippines. Delivery times are estimates and are not guaranteed. We are not liable for delays 
+                    caused by courier services, weather, or other circumstances beyond our control. Shipping fees, if applicable, will be disclosed 
+                    at checkout.
+                </p>
+
+                <h3>5. Privacy</h3>
+                <p>
+                    We are committed to protecting your personal information in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173). 
+                    Please refer to our Privacy Policy for details on how we collect, use, and protect your data.
+                </p>
+
+                <h3>6. Limitation of Liability</h3>
+                <p>
+                    To the fullest extent permitted by law, we shall not be liable for any indirect, incidental, or consequential damages arising from 
+                    the use of our website or products, including but not limited to loss of data, revenue, or business opportunities.
+                </p>
+
+                <h3>7. Governing Law</h3>
+                <p>
+                    These Terms and Conditions shall be governed by and construed in accordance with the laws of the Republic of the Philippines. Any 
+                    disputes shall be subject to the exclusive jurisdiction of the appropriate courts in the Philippines.
+                </p>
+
+                <br>
+                <br>
+                <p>By using this website, you acknowledge that you have read, understood, and agreed to these Terms and Conditions.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="acceptTerms" class="accept-btn">I ACCEPT</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="copyright">Bake King Metal Fabrication Services © 2018</p>
+    </footer>
+
+    
+</body>
+</html>

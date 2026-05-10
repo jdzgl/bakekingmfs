@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Manage Products</title>
+
+    <link rel="stylesheet" href=".css/admin-products.css">
+    <script type="module" src=".js/inject-admin-header.js"></script>
+    <script type="module" src=".js/admin-header.js"></script>
+    <script type="module" src=".js/admin-products.js"></script>
+</head>
+<body>
+    <div id="admin-header-placeholder"></div>
+    <main class="ap-main">
+        <div class="ap-page-header">
+            <div class="ap-header-left">
+                <a href="admin-shop.html" class="ap-back-link">&#8592; Back to Categories</a>
+                <h1 class="ap-page-title">
+                    CATEGORY: <span class="ap-highlight" id="categoryTitle">LOADING...</span>
+                </h1>
+            </div>
+            <button class="ap-add-btn" id="openAddProduct">
+                <span>+</span> Add New Product
+            </button>
+        </div>
+        <div class="ap-stats-row">
+            <div class="ap-stat-card">
+                <span class="ap-stat-label">Total Products</span>
+                <span class="ap-stat-value" id="totalProdCount">0</span>
+            </div>
+        </div>
+        <div class="ap-prod-grid" id="productGrid">
+            <p class="ap-empty">Loading products...</p>
+        </div>
+    </main>
+    <div class="ap-modal-overlay" id="productModal">
+        <div class="ap-modal-panel">
+            <button class="ap-modal-close" id="closeProductModal">&times;</button>
+            <h2 class="ap-modal-title" id="modalTitle">Add New Product</h2>
+            <form id="productForm">
+                <div class="ap-form-scroll">
+                    <div class="ap-form-section">
+                        <h3 class="ap-section-heading">General Information</h3>
+                        <div class="ap-form-group ap-col-2">
+                            <div>
+                                <label>Product Name</label>
+                                <input type="text" id="prodName" placeholder="e.g. Pizza Oven" required>
+                            </div>
+                            <div>
+                                <label>Base Price (₱)</label>
+                                <input type="number" id="prodPrice" placeholder="e.g. 12000" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="ap-form-group">
+                            <label>Description</label>
+                            <textarea id="prodDesc" rows="3" placeholder="Brief product description..."></textarea>
+                        </div>
+                    </div>
+                    <div class="ap-form-section">
+                        <label>Main Product Image</label>
+                        <div id="mainImageDropZone" class="image-drop-zone">
+                            <img id="apImgPreview" src="" style="display:none; max-width:100%;">
+                            <p id="apImgNone">Drag & Drop or Click to Upload</p>
+                            <input type="file" id="prodImageFile" hidden accept="image/*">
+                        </div>
+                        <input type="hidden" id="prodImagePath">
+                    </div>
+                    <div class="ap-form-section">
+                        <label>Product Gallery (Extra Photos)</label>
+                        <div id="galleryContainer" class="gallery-grid"></div>
+                        <button type="button" id="addGalleryPhoto" class="btn-add-row">+ Add Gallery Photo</button>
+                    </div>
+                    <div class="ap-form-section">
+                        <h3 class="ap-section-heading">Specifications</h3>
+                        <div class="ap-form-group ap-col-2">
+                            <div>
+                                <label>Power Source</label>
+                                <input type="text" id="specPowerSource" placeholder="e.g. LPG">
+                            </div>
+                            <div>
+                                <label>Material</label>
+                                <input type="text" id="specMaterial" placeholder="e.g. Galvanized Steel">
+                            </div>
+                            <div>
+                                <label>Tray Size</label>
+                                <input type="text" id="specTraySize" placeholder="e.g. Fits 13x18 inch Tray">
+                            </div>
+                            <div>
+                                <label>Warranty</label>
+                                <input type="text" id="specWarranty" placeholder="e.g. 1-Year Service Warranty">
+                            </div>
+                        </div>
+                        <div class="ap-form-group">
+                            <label>Inclusion</label>
+                            <input type="text" id="specInclusion" placeholder="e.g. 1 Gas Oven Stand, Gas Deck Oven">
+                        </div>
+                    </div>
+                    <div class="ap-form-section">
+                        <h3 class="ap-section-heading">Product Colors</h3>
+                        <div id="colorRows"></div>
+                        <button type="button" id="addColorRow" class="btn-add-row">+ Add Color</button>
+                    </div>
+
+                    <div class="ap-form-section">
+                        <h3 class="ap-section-heading">Variants</h3>
+                        <div id="variantRows" class="ap-variant-rows"></div>
+                        <button type="button" class="ap-add-row-btn" id="addVariantRow">+ Add Variant</button>
+                    </div>
+                    <div class="ap-form-section">
+                        <h3 class="ap-section-heading">Add-ons</h3>
+                        <div id="addonRows" class="ap-variant-rows"></div>
+                        <button type="button" class="ap-add-row-btn" id="addAddonRow">+ Add Add-on</button>
+                    </div>
+                </div>
+                <div class="ap-modal-footer">
+                    <button type="button" class="ap-btn-cancel" id="cancelBtn">CANCEL</button>
+                    <button type="submit" class="ap-btn-save" id="saveProductBtn">SAVE PRODUCT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="ap-modal-overlay" id="confirmModal" style="z-index: 1001;">
+        <div class="ap-confirm-panel">
+            <div class="ap-confirm-content">
+                <p id="confirmMessage">Are you sure you want to proceed?</p>
+                <div class="ap-confirm-actions">
+                    <button type="button" class="ap-btn-cancel" id="confirmNo">NO</button>
+                    <button type="button" class="ap-btn-save" id="confirmYes">YES</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="toast" class="ap-toast">Product changes have been made successfully.</div>
+</body>
+</html>

@@ -1,0 +1,501 @@
+:root {
+    --primary-orange: #FF8800;
+    --light-beige:    #FFF5E1;
+    --dark-brown:     #2B1410;
+    --beige:          #F5E6CC;
+    --dark-orange:    #ff8c08;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease-out, margin 0s, padding 0s;
+}
+
+.notification-content {
+    background-color: var(--dark-brown);
+    font-family: 'Satoshi', sans-serif;
+    color: var(--light-beige);
+    padding: 4px 12px;
+    text-align: center;
+    font-size: 13px;
+    width: 100%;
+    height: 20px; 
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-content.is-active {
+    display: flex; 
+}
+
+.notification-cta {
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 4px;
+    color: var(--light-beige);
+}
+
+.notification-cta:hover { 
+    color: var(--primary-orange); 
+}
+
+header {
+    background-color: var(--light-beige);
+    width: 100%;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.header-container {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+.logo:active { 
+    transform: scale(0.98); 
+}
+
+.logo-img {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-family: 'Integral-CF', sans-serif;
+    font-size: 30px;
+    color: var(--primary-orange);
+    text-shadow: 0 2px 3px rgba(0,0,0,0.4);
+    -webkit-text-stroke: 1px var(--dark-brown);
+    padding-left: 16px;
+    padding-bottom: 8px;
+    white-space: nowrap;
+}
+
+nav {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.desktop-nav {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-link {
+    font-family: 'Satoshi', sans-serif;
+    color: var(--dark-brown);
+    text-decoration: none;
+    padding: 5px 0;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--primary-orange);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: var(--primary-orange);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.cart-prof {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-left: 20px;
+}
+
+.custNotifBtn, 
+.cart-wrapper, 
+.user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--dark-brown);
+    transition: transform 0.3s ease-out, color 0.3s ease-out;
+}
+
+.custNotifBtn:hover, 
+.cart-wrapper:hover, 
+.user-profile:hover {
+    transform: translateY(-2px);
+}
+
+.custNotifBtn:active, 
+.cart-wrapper:active, 
+.user-profile:active {
+    transform: scale(0.9);
+}
+
+.notif-icon, 
+.cart-icon, 
+.prof-icon {
+    height: 28px;
+    width: 28px;
+}
+
+.notif-badge, 
+.cart-count-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--primary-orange);
+    color: var(--white);
+    border: 2px solid var(--dark-brown);
+    box-sizing: border-box;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-weight: 900;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    z-index: 1001;
+}
+
+.mobile-menu-btn span {
+    width: 100%;
+    height: 3px;
+    background: var(--dark-brown);
+    border-radius: 10px;
+    display: block;
+}
+
+.mobile-menu-btn.is-open span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+.mobile-menu-btn.is-open span:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.is-open span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+.mobile-menu-btn:hover span { 
+    background: var(--primary-orange); 
+}
+
+.sidebar-drawer {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--light-beige);
+    z-index: 999999 !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    display: none; 
+}
+
+.sidebar-drawer.is-open {
+    display: flex;
+    transform: translateX(0);
+}
+
+.sidebar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 2px solid var(--primary-orange);
+    flex-shrink: 0;
+}
+
+.sidebar-logo-text {
+    font-family: 'Integral-CF', sans-serif;
+    font-size: 20px;
+    color: var(--primary-orange);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    -webkit-text-stroke: 0.5px var(--dark-brown);
+    letter-spacing: 1px;
+}
+
+.sidebar-close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--dark-brown);
+    line-height: 1;
+    padding: 4px;
+}
+
+.sidebar-close-btn:hover { 
+    color: var(--primary-orange); 
+    transform: rotate(90deg); 
+}
+
+.sidebar-login-block {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid rgba(43,20,16,0.1);
+}
+
+.sidebar-login-btn {
+    display: block;
+    text-align: center;
+    background: var(--primary-orange);
+    color: white;
+    font-family: 'Integral-CF', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 11px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.sidebar-login-btn:hover { 
+    background: var(--dark-orange); 
+    transform: translateY(-1px); 
+}
+
+.sidebar-register-btn {
+    display: block;
+    text-align: center;
+    background: transparent;
+    color: var(--primary-orange);
+    border: 2px solid var(--primary-orange);
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.sidebar-register-btn:hover { 
+    background: rgba(255,136,0,0.08); 
+}
+
+.sidebar-user-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(43,20,16,0.1);
+}
+
+.sidebar-user-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-orange);
+}
+
+.sidebar-user-name {
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark-brown);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    flex: 1;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 15px;
+    color: var(--dark-brown);
+    text-decoration: none;
+    background: none;
+    border: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+}
+
+.sidebar-link:hover {
+    background: rgba(255,136,0,0.08);
+    color: var(--primary-orange);
+}
+
+.sidebar-cart-count, .sidebar-notif-count {
+    background: var(--primary-orange);
+    color: white;
+    border-radius: 20px;
+    padding: 1px 8px;
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: rgba(43,20,16,0.1);
+    margin: 6px 0;
+}
+
+.sidebar-logout-btn {
+    color: #c62828;
+    font-family: 'Satoshi-Bold', sans-serif;
+    font-weight: 700;
+}
+
+.sidebar-logout-btn:hover {
+    background: rgba(198,40,40,0.07);
+    color: #c62828;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 999998 !important;
+    display: none;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+}
+
+.sidebar-overlay.is-visible {
+    display: block;
+    opacity: 1;
+}
+
+#header-placeholder {
+    position: relative;
+    z-index: 99999; 
+}
+
+.sidebar-drawer {
+    position: fixed !important; 
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 1000000 !important; 
+    background: var(--light-beige);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    display: none; 
+}
+
+.sidebar-drawer.is-open {
+    display: flex;
+    transform: translateX(0);
+}
+
+.sidebar-overlay {
+    position: fixed !important;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999999 !important; 
+    display: none;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.is-visible {
+    display: block;
+    opacity: 1;
+}
+
+@media screen and (max-width: 1024px) {
+    .desktop-nav { gap: 15px; }
+}
+
+@media screen and (max-width: 768px) {
+    .desktop-nav { display: none; }
+    .mobile-menu-btn { display: flex; margin-right: 15px;}
+    .prof-icon { display: none; }
+    .notif-badge, .cart-count-badge { width: 18px; height: 18px; font-size: 9px; top: -4px; right: -4px; }
+    .notification-content { font-size: 11px; padding: 4px 8px; }
+}
+
+@media screen and (max-width: 480px) {
+    .logo-text { font-size: 18px; }
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf') format('opentype');
+    font-weight: 300 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Satoshi-Bold';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Integral-CF';
+    src: url('../assets/fonts/integral-cf/Demo_Fonts/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Satoshi-Black';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Black.otf') format('opentype');
+    font-weight: 900;
+    font-display: swap;
+}

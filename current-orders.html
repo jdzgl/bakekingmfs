@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Current Orders</title>
+    
+    <link rel="stylesheet" href=".css/current-orders.css">
+    <link rel="stylesheet" href=".css/shop.css">
+    <link rel="stylesheet" href=".css/header.css">
+    <link rel="stylesheet" href=".css/global.css">
+    <script type="module" src=".js/inject-components.js"></script>
+    <script type="module" src=".js/header.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="module" src=".js/checkout.js"></script>
+    <script type="module" src=".js/current-orders.js"></script>
+</head>
+<body class="current-orders-body">
+    <div id="header-placeholder"></div>
+    <main class="current-orders">
+        <div class="divider5"></div>
+        <div class="orders-container">
+            <a href="profile.html" class="back-btn">
+                <img src="assets/icons/back.png" alt="Back" width="30">
+            </a>
+            <h1 class="page-title">CURRENT <span class="highlight">ORDERS</span></h1>
+            <section class="order-column">
+                <div class="column-header">
+                    <h2>JUST ORDERED</h2>
+                    <p class="subtitle">You can still cancel your orders here</p>
+                </div>
+                <div id="col-pending">
+                    <p style="font-family:'Satoshi'; font-size:13px; opacity:0.5; padding:10px 0;">
+                        Loading...
+                    </p>
+                </div>
+                <a href="order-history.html" class="more-link">MORE &gt;</a>
+            </section>
+            <section class="order-column">
+                <div class="column-header">
+                    <h2>IN PRODUCTION</h2>
+                    <p class="subtitle">You cannot cancel your order here</p>
+                </div>
+                <div id="col-production">
+                    <p style="font-family:'Satoshi'; font-size:13px; opacity:0.5; padding:10px 0;">
+                        Loading...
+                    </p>
+                </div>
+                <a href="order-history.html" class="more-link">MORE &gt;</a>
+            </section>
+            <section class="order-column">
+                <div class="column-header">
+                    <h2>COMPLETED</h2>
+                    <p class="subtitle">Thank you so much for trusting us!</p>
+                </div>
+                <div id="col-completed">
+                    <p style="font-family:'Satoshi'; font-size:13px; opacity:0.5; padding:10px 0;">
+                        Loading...
+                    </p>
+                </div>
+                <a href="order-history.html" class="more-link">MORE &gt;</a>
+            </section>
+        </div>
+        <div id="pdmCheckoutModal" class="pdm-modal pdm-hidden" style="position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center;">
+                <div class="pdm-modal-content" style="background: #FFF5E1; padding: 20px; border-radius: 15px; max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto;">
+                    <div id="pdmStep4" class="pdm-step pdm-hidden">
+                        <div class="pdm-receipt-paper" id="pdmReceiptPaper">
+                            <div class="pdm-receipt-header">
+                                <img src="assets/icons/logo-nobg.png" class="pdm-receipt-logo" alt="Bake King"
+                                    onerror="this.style.display='none'">
+                                <div class="pdm-receipt-company">
+                                    <h2>Bake King Metal Fabrication Services</h2>
+                                    <p>280 West Berkely Street California Village, Barangay San Bartolome</p>
+                                    <p>Novaliches, Quezon City, 1116</p>
+                                    <p><strong>Gian Carlo So &ndash; CEO / Owner</strong></p>
+                                </div>
+                                <div class="pdm-ern-box">
+                                    ERN# <span id="pdmReceiptERN">0000</span>
+                                </div>
+                            </div>
+                            <div class="pdm-receipt-body">
+                                <div class="pdm-receipt-left">
+                                    <div class="pdm-receipt-line">
+                                        Received from&nbsp;
+                                        <span class="pdm-receipt-underline" id="pdmRName"></span>
+                                    </div>
+                                    <div class="pdm-receipt-line">
+                                        with address at&nbsp;
+                                        <span class="pdm-receipt-underline" id="pdmRAddress"></span>
+                                    </div>
+                                    <div class="pdm-receipt-line">
+                                        engaged in business style of&nbsp;
+                                        <span class="pdm-receipt-underline">N/A</span>
+                                    </div>
+                                    <div class="pdm-receipt-line">
+                                        the sum of&nbsp;
+                                        <span class="pdm-receipt-underline" id="pdmRSumText"></span>
+                                    </div>
+                                    <div class="pdm-receipt-line-indent">
+                                        (&#8369;&nbsp;<span class="pdm-receipt-underline" id="pdmRSumNum"></span>)
+                                    </div>
+                                    <div class="pdm-receipt-line">
+                                        in full/partial payment for&nbsp;
+                                        <span class="pdm-receipt-underline" id="pdmRItem"></span>
+                                    </div>
+
+                                    <div class="pdm-receipt-signature">
+                                        <div class="pdm-sig-wrapper" style="position: relative; display: inline-block; text-align: center;">
+                                            <img src="assets/signatures/angel-jade-so.png" alt="Signature" class="pdm-digital-sig" 
+                                                style="position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); height: 50px; pointer-events: none;"
+                                                onerror="this.style.display='none'">
+                                            <div class="pdm-sig-line" style="border-bottom: 1px solid #000; width: 200px; margin-bottom: 5px;"></div>
+                                            <p style="margin: 0; font-weight: 800; font-size: 13px; text-transform: uppercase; color: #2B1410;">
+                                                ANGEL JADE SO
+                                            </p>
+                                        </div>
+                                        <p style="margin: 0; font-size: 10px; color: #666;">Admin / Authorized Representative</p>
+                                    </div>
+                                </div>
+                                <div class="pdm-receipt-right">
+                                    <table class="pdm-receipt-table">
+                                        <thead>
+                                            <tr>
+                                                <th>QUANTITY</th>
+                                                <th>ITEM</th>
+                                                <th>PRICE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="pdmRQty">1</td>
+                                                <td>
+                                                    <strong id="pdmRProdName"></strong>
+                                                    <span id="pdmRProdDetails" class="pdm-inv-item-details"></span>
+                                                </td>
+                                                <td id="pdmRProdPrice">₱0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="pdm-inv-divider"></div>
+                                    <div class="pdm-receipt-row">
+                                        <strong>DELIVERY FEE</strong>
+                                        <span id="pdmRDelivery">₱0</span>
+                                    </div>
+                                    <div class="pdm-inv-divider-thick"></div>
+                                    <div class="pdm-receipt-total">
+                                        <strong>TOTAL</strong>
+                                        <div class="pdm-total-wrap">
+                                            <span id="pdmRTotal">₱0</span>
+                                            <p id="pdmRPaymentMethod">Paid via COD</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="pdmUploadSection" class="pdm-upload-wrapper pdm-hidden">
+                            <span class="pdm-block-title">Upload Proof of Payment</span>
+                            <input type="file" id="pdmPaymentProof" accept="image/*" class="pdm-file-input">
+                        </div>
+                        <div class="pdm-step4-actions">
+                            <button class="pdm-screenshot-btn pdm-hidden" id="pdmScreenshotBtn" type="button">
+                                SAVE RECEIPT
+                            </button>
+                            <button class="pdm-confirm-btn" id="pdmConfirmOrderBtn" type="button">
+                                CONFIRM ORDER
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="pdmReviewModal" class="pdm-modal pdm-hidden" style="position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center;">
+            <div style="background: #FFF5E1; padding: 30px; border-radius: 20px; width: 90%; max-width: 450px; position: relative; border: 2px solid #2B1410;">
+                <span id="closeReview" style="position: absolute; right: 20px; top: 15px; cursor: pointer; font-size: 24px; font-weight: bold;">&times;</span>
+                <h2 style="font-family: 'Satoshi-Bold'; color: #2B1410; margin-bottom: 10px;">Post a Review</h2>
+                <p id="reviewProductName" style="font-family: 'Satoshi'; font-size: 14px; margin-bottom: 20px; opacity: 0.7;"></p>
+                <div class="star-rating" style="display: flex; gap: 5px; margin-bottom: 20px; font-size: 30px; color: #CCC; cursor: pointer;">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <textarea id="reviewText" placeholder="Write your experience with this product..." style="width: 100%; height: 120px; padding: 12px; border-radius: 10px; border: 1px solid #DDD; margin-bottom: 20px; font-family: 'Satoshi'; outline: none;"></textarea>
+                <button id="submitReviewBtn" style="width: 100%; background: #FF8800; color: white; padding: 12px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">SUBMIT REVIEW</button>
+            </div>
+        </div>
+    </main>
+    <div class="divider5"></div>
+    <div id="footer-placeholder"></div>
+</body>
+</html>

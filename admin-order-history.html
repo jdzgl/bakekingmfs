@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History | Bake King Admin</title>
+    
+    <link rel="stylesheet" href=".css/admin-header.css">
+    <link rel="stylesheet" href=".css/admin-order-history.css">
+    <script type="module" src=".js/inject-admin-header.js"></script>
+    <script type="module" src=".js/admin-header.js"></script>
+    <script type="module" src=".js/admin-order-history.js"></script>
+</head>
+<body>
+    <div id="admin-header-placeholder"></div>
+    <main class="history-container">
+        <header class="history-header">
+            <div class="header-titles">
+                <h1>ORDER <span>HISTORY</span></h1>
+                <p>A complete archive of all processed and past orders — for internal record keeping</p>
+            </div>
+            <div class="history-stats">
+                <span id="totalHistoryCount">0 orders</span>
+            </div>
+        </header>
+        <section class="filter-bar">
+            <div class="search-box">
+                <input type="text" id="histSearch" placeholder="Search by name or order ID...">
+            </div>
+        </section>
+        <div class="history-table-wrapper">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="historyList">
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-container">
+            <button id="prevPage" class="page-btn" disabled>&larr; Previous</button>
+            <div id="pageNumbers" class="page-numbers"></div>
+            <button id="nextPage" class="page-btn">Next &rarr;</button>
+        </div>
+    </main>
+    <div class="adm-modal" id="admModal">
+        <div class="adm-modal-content receipt-paper">
+            <button class="adm-modal-close" id="admModalClose">&times;</button>
+            <div class="receipt-branding">
+                <div class="brand-logo">BAKE KING</div>
+                <div class="brand-tagline">Premium Baking Equipment & Supplies</div>
+            </div>
+            <div class="receipt-header">
+                <div class="status-badge-container">
+                    <span class="receipt-badge" id="admModalBadge">READY</span>
+                </div>
+                <h2>INVOICE #<span id="admModalERN"></span></h2>
+                <p class="receipt-date" id="admRDate"></p>
+            </div>
+            <div class="receipt-grid">
+                <div class="receipt-section">
+                    <h4>BILL TO</h4>
+                    <p class="customer-name" id="admRName"></p>
+                    <p id="admRAddress"></p>
+                    <p id="admDContact"></p>
+                </div>
+                <div class="receipt-section text-right">
+                    <h4>PAYMENT INFO</h4>
+                    <p id="admRPayment"></p>
+                    <p>Transaction: Verified</p>
+                </div>
+            </div>
+            <div class="receipt-items">
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th>DESCRIPTION</th>
+                            <th class="text-center">QTY</th>
+                            <th class="text-right">AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="item-main-name" id="admRProdName"></div>
+                                <div class="item-sub-details" id="admRProdDetails"></div>
+                            </td>
+                            <td class="text-center" id="admRQty"></td>
+                            <td class="text-right" id="admRProdPrice"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="receipt-summary">
+                <div class="summary-line">
+                    <span>Shipping & Handling</span>
+                    <span id="admRDelivery"></span>
+                </div>
+                <div class="summary-line grand-total">
+                    <span>TOTAL AMOUNT</span>
+                    <span id="admRTotal"></span>
+                </div>
+            </div>
+            <div class="receipt-footer">
+                <p>Thank you for choosing Bake King!</p>
+                <p class="footer-fineprint">This is a system-generated electronic receipt.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

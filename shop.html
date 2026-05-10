@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Shop</title>
+
+    <link rel="stylesheet" href=".css/shop.css">
+    <link rel="stylesheet" href=".css/header.css">
+    <link rel="stylesheet" href=".css/global.css">
+    <script type="module" src=".js/auth-check.js"></script>
+    <script type="module" src=".js/inject-components.js"></script>
+    <script type="module" src=".js/header.js"></script>
+    <script type="module" src=".js/shop.js"></script>
+    <script type="module" src=".js/details.js"></script>
+    <script type="module" src=".js/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main class="shop-main">
+        <div class="shop-title-row">
+            <button class="back-btn" onclick="history.back()" aria-label="Go back">
+                <img src="assets/icons/back.png" alt="←">
+            </button>
+            <h1 id="page-title" class="shop-page-heading">
+                LOADING <span class="highlight">...</span>
+            </h1>
+        </div>
+        <div class="shop-grid-wrapper">
+            <div id="product-grid" class="shop-product-grid">
+                <p class="shop-empty-msg">Loading the best equipment for you...</p>
+            </div>
+        </div>
+        <div id="favorites-section" style="display: none; margin-top: 50px;">
+            <h2 class="section-title">YOUR <span class="highlight">FAVORITES</span></h2>
+            <div id="favorites-grid" class="shop-grid"></div>
+        </div> 
+    </main>
+    <div id="footer-placeholder"></div>
+    <div class="pdm-overlay" id="pdmOverlay">
+        <div class="pdm-panel">
+            <button class="pdm-close" onclick="closeModal()">&times;</button>
+            <div class="pdm-category-heading" id="pdmCategoryHeading">
+                GAS <span class="highlight">OVENS</span>
+            </div>
+            <div class="pdm-step" id="pdmStep1">
+                <div class="pdm-step1-grid">
+                    <div class="pdm-product-column-left">
+                        <div class="pdm-main-card">
+                            <div class="pdm-card-img-container">
+                                <img id="pdmMainImg" src="" alt="Product Image"
+                                     onerror="this.onerror=null; this.src='assets/icons/placeholder.png'">
+                            </div>
+                            <div class="pdm-card-footer">
+                                <div class="pdm-card-text">
+                                    <h3 id="pdmProductName">Product Name</h3>
+                                    <p id="pdmProductBasePrice">₱0</p>
+                                </div>
+                                <img src="assets/icons/crown.png" class="pdm-card-icon" alt="icon">
+                            </div>
+                        </div>
+                        <div class="pdm-specs-box pdm-mt">
+                            <div class="pdm-block-title">Technical Specifications</div>
+                            <ul class="pdm-specs-list" id="pdmSpecsList"></ul>
+                            <div class="pdm-block-title pdm-mt" id="pdmInclusionTitle">Inclusion</div>
+                            <ul class="pdm-specs-list" id="pdmInclusionList"></ul>
+                            <div class="pdm-block-title pdm-mt">Warranty and Service</div>
+                            <p class="pdm-warranty-text" id="pdmWarrantyText"></p>
+                        </div>
+                    </div>
+                    <div class="pdm-product-column-right">
+                        <div class="pdm-block-title">Variants</div>
+                        <div class="pdm-variant-list" id="pdmVariantList"></div>
+                        <div class="pdm-block-title pdm-mt">Unit Color</div>
+                        <div class="pdm-color-dots" id="pdmColorDots"></div>
+                        <div class="pdm-block-title pdm-mt">Photos</div>
+                        <div class="pdm-photo-strip" id="pdmPhotoStrip"></div>
+                        <div class="pdm-center-btn-container pdm-mt">
+                            <button class="pdm-next-btn" onclick="goToStep(2)">NEXT</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pdm-block-title pdm-mt">Reviews</div>
+                <div class="pdm-review-list" id="pdmReviewList"></div>
+            </div>
+            <div class="pdm-step pdm-hidden" id="pdmStep2">
+                <div class="pdm-step1-grid">
+                    <div class="pdm-product-column-left">
+                        <div class="pdm-main-card">
+                            <div class="pdm-card-img-container">
+                                <img id="pdmS2Img" src="" alt="Product Image"
+                                    onerror="this.onerror=null; this.src='assets/icons/placeholder.png'">
+                            </div>
+                            <div class="pdm-card-footer">
+                                <div class="pdm-card-text">
+                                    <h3 id="pdmS2Name">Product</h3>
+                                    <p id="pdmS2Price">₱0</p>
+                                </div>
+                                <img src="assets/icons/crown.png" class="pdm-card-icon" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pdm-product-column-right">
+                        <div class="pdm-block-title">Additional</div>
+                        <div id="pdmAddonList" class="pdm-variant-list"></div>
+                        <div id="pdmAddonNoneTag" class="pdm-addon-none-tag">NONE</div>
+                        <div class="pdm-block-title pdm-mt">Delivery Information</div>
+                        <div class="pdm-form-grid">
+                            <div class="pdm-form-group">
+                                <label>First Name</label>
+                                <input type="text" id="pdmFirstName" placeholder="First Name" autocomplete="given-name">
+                            </div>
+                            <div class="pdm-form-group">
+                                <label>Last Name</label>
+                                <input type="text" id="pdmLastName" placeholder="Last Name" autocomplete="family-name">
+                            </div>
+                            <div class="pdm-form-group">
+                                <label>Contact Number</label>
+                                <div class="pdm-phone-row">
+                                    <span class="pdm-phone-prefix">+63</span>
+                                    <input type="tel" id="pdmContact" placeholder="9XX XXX XXXX" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="pdm-form-group">
+                                <label>Province</label>
+                                <select id="pdmProvince">
+                                    <option value="">Select Province</option>
+                                </select>
+                            </div>
+                            <div class="pdm-form-group">
+                                <label>City</label>
+                                <select id="pdmCity">
+                                    <option value="">Select Province first</option>
+                                </select>
+                            </div>
+                            <div class="pdm-form-group">
+                                <label>Mode of Delivery</label>
+                                <select id="pdmDeliveryMode">
+                                    <option value="Door-to-Door via Bake King Delivery Services">Door-to-Door via Bake King Delivery Services</option>
+                                    <option value="Pick-up at Store">Pick-up at Store</option>
+                                    <option value="Third-Party Courier">Third-Party Courier</option>
+                                </select>
+                            </div>
+                            <div class="pdm-form-group pdm-full-width">
+                                <label>Address (Blk | Lot | Subdivision | Barangay | City | Province | ZIP Code)</label>
+                                <textarea id="pdmAddress" rows="3" placeholder="Complete address..."></textarea>
+                            </div>
+                            <div class="pdm-form-group">
+                                <label>Quantity</label>
+                                <div class="pdm-qty-row">
+                                    <button class="pdm-qty-btn" id="pdmQtyMinus" type="button">&#8722;</button>
+                                    <span id="pdmQtyDisplay">1</span>
+                                    <button class="pdm-qty-btn" id="pdmQtyPlus" type="button">&#43;</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pdm-step2-actions pdm-mt">
+                            <button class="pdm-back-step-btn" onclick="goToStep(1)">&#8592; BACK</button>
+                            <button class="pdm-cart-btn" id="pdmAddToCartBtn" type="button">ADD TO CART</button>
+                            <button class="pdm-checkout-btn" id="pdmCheckoutBtn" type="button">CHECKOUT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="orderSummaryModal" class="pdm-modal-overlay pdm-hidden">
+                <div class="pdm-summary-card">
+                    <h3>Confirm Your Order</h3>
+                    <div id="summaryDetails"></div>
+                    <div class="pdm-summary-actions">
+                        <button onclick="document.getElementById('orderSummaryModal').classList.add('pdm-hidden')" class="btn-cancel">Edit Details</button>
+                        <button onclick="executeFinalOrder()" class="btn-confirm">Place Order Now</button>
+                    </div>
+                </div>
+            </div>
+            <div id="pdmStep3" class="pdm-step pdm-hidden">
+                <div class="pdm-invoice-container">
+                    <div class="pdm-invoice-main-card">
+                        <div class="pdm-inv-img-wrap">
+                            <img id="pdmS3Img" src="" alt="Product"
+                                onerror="this.onerror=null; this.src='assets/icons/placeholder.png'">
+                        </div>
+                        <div class="pdm-inv-card-footer">
+                            <h3 id="pdmS3Name">Product Name</h3>
+                            <p id="pdmS3BasePrice">₱0</p>
+                        </div>
+                    </div>
+                    <div class="pdm-invoice-paper">
+                        <div class="pdm-inv-header">
+                            <h2>INVOICE</h2>
+                            <span id="pdmInvNumber">#000</span>
+                        </div>
+                        <table class="pdm-inv-table">
+                            <thead>
+                                <tr>
+                                    <th>QUANTITY</th>
+                                    <th>ITEM</th>
+                                    <th>PRICE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pdmInvBody"></tbody>
+                        </table>
+                        <div class="pdm-inv-spacer"></div>
+                        <div class="pdm-inv-divider"></div>
+                        <div class="pdm-inv-row">
+                            <strong>DELIVERY FEE</strong>
+                            <span id="pdmInvDelivery">₱0</span>
+                        </div>
+                        <div class="pdm-inv-divider-thick"></div>
+                        <div class="pdm-inv-total-row">
+                            <strong>TOTAL</strong>
+                            <span id="pdmInvTotal">₱0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pdm-invoice-actions-section">
+                    <div class="pdm-payment-wrapper">
+                        <span class="pdm-block-title">Mode of Payment</span>
+                        <select id="pdmPaymentMode" class="pdm-select-input">
+                            <option value="Cash on Delivery">Cash on Delivery</option>
+                            <option value="GCash">GCash</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                        </select>
+                    </div>
+                    <div id="pdmPaymentInfo" style="margin-top: 10px; padding: 10px; background: #fdf2e9; border-radius: 8px; display: none; font-size: 13px;"></div>
+                    <div id="pdmProofContainer" style="margin-top: 10px; display: none;">
+                        <label style="font-size: 12px; font-weight: bold; display: block; margin-bottom: 5px; font-family: 'Satoshi-Bold';">UPLOAD RECEIPT</label>
+                        <input type="file" id="pdmPaymentProofFile" accept="image/*" style="font-size: 12px;">
+                    </div>
+                    <div class="pdm-step3-actions">
+                        <button class="pdm-back-step-btn" id="pdmInvBackBtn" type="button">&#8592; BACK</button>
+                        <button class="pdm-checkout-btn" id="pdmInvoiceCheckoutBtn" type="button">CHECKOUT</button>
+                    </div>
+                </div>
+            </div>
+            <div id="pdmStep4" class="pdm-step pdm-hidden">
+                <div class="pdm-receipt-paper" id="pdmReceiptPaper">
+                    <div class="pdm-receipt-header">
+                        <img src="assets/icons/logo-nobg.png" class="pdm-receipt-logo" alt="Bake King"
+                            onerror="this.style.display='none'">
+                        <div class="pdm-receipt-company">
+                            <h2>Bake King Metal Fabrication Services</h2>
+                            <p>280 West Berkely Street California Village, Barangay San Bartolome</p>
+                            <p>Novaliches, Quezon City, 1116</p>
+                            <p><strong>Gian Carlo So &ndash; CEO / Owner</strong></p>
+                        </div>
+                        <div class="pdm-ern-box">
+                            ERN# <span id="pdmReceiptERN">0000</span>
+                        </div>
+                    </div>
+                    <div class="pdm-receipt-body">
+                        <div class="pdm-receipt-left">
+                            <div class="pdm-receipt-line">
+                                Received from&nbsp;
+                                <span class="pdm-receipt-underline" id="pdmRName"></span>
+                            </div>
+                            <div class="pdm-receipt-line">
+                                with address at&nbsp;
+                                <span class="pdm-receipt-underline" id="pdmRAddress"></span>
+                            </div>
+                            <div class="pdm-receipt-line">
+                                engaged in business style of&nbsp;
+                                <span class="pdm-receipt-underline">N/A</span>
+                            </div>
+                            <div class="pdm-receipt-line">
+                                the sum of&nbsp;
+                                <span class="pdm-receipt-underline" id="pdmRSumText"></span>
+                            </div>
+                            <div class="pdm-receipt-line-indent">
+                                (&#8369;&nbsp;<span class="pdm-receipt-underline" id="pdmRSumNum"></span>)
+                            </div>
+                            <div class="pdm-receipt-line">
+                                in full/partial payment for&nbsp;
+                                <span class="pdm-receipt-underline" id="pdmRItem"></span>
+                            </div>
+                            <div class="pdm-receipt-signature">
+                                <div class="pdm-sig-wrapper" style="position: relative; display: inline-block; text-align: center;">
+                                    <img src="assets/signatures/angel-jade-so.png" alt="Signature" class="pdm-digital-sig" 
+                                        style="position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); height: 50px; pointer-events: none;"
+                                        onerror="this.style.display='none'">
+                                    <div class="pdm-sig-line" style="border-bottom: 1px solid #000; width: 200px; margin-bottom: 5px;"></div>
+                                        <p style="margin: 0; font-weight: 800; font-size: 13px; text-transform: uppercase; color: #2B1410;">
+                                            ANGEL JADE SO
+                                        </p>
+                                    </div>
+                                    <p style="margin: 0; font-size: 10px; color: #666;">Admin / Authorized Representative</p>
+                                </div>
+                            </div>
+                        <div class="pdm-receipt-right">
+                            <table class="pdm-receipt-table">
+                                <thead>
+                                    <tr>
+                                        <th>QUANTITY</th>
+                                        <th>ITEM</th>
+                                        <th>PRICE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="pdmRQty">1</td>
+                                        <td>
+                                            <strong id="pdmRProdName"></strong>
+                                            <span id="pdmRProdDetails" class="pdm-inv-item-details"></span>
+                                        </td>
+                                        <td id="pdmRProdPrice">₱0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="pdm-inv-divider"></div>
+                            <div class="pdm-receipt-row">
+                                <strong>DELIVERY FEE</strong>
+                                <span id="pdmRDelivery">₱0</span>
+                            </div>
+                            <div class="pdm-inv-divider-thick"></div>
+                            <div class="pdm-receipt-total">
+                                <strong>TOTAL</strong>
+                                <div class="pdm-total-wrap">
+                                    <span id="pdmRTotal">₱0</span>
+                                    <p id="pdmRPaymentMethod">Paid via COD</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="pdmUploadSection" class="pdm-upload-wrapper pdm-hidden">
+                    <span class="pdm-block-title">Upload Proof of Payment</span>
+                    <input type="file" id="pdmPaymentProof" accept="image/*" class="pdm-file-input">
+                </div>
+                <div class="pdm-step4-actions">
+                    <button class="pdm-screenshot-btn pdm-hidden" id="pdmScreenshotBtn" type="button">
+                        SAVE RECEIPT
+                    </button>
+                    <button class="pdm-confirm-btn" id="pdmConfirmOrderBtn" type="button">
+                        CONFIRM ORDER
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="asc-modal-overlay" id="checkoutConfirmModal" style="display: none; z-index: 3000;">
+        <div class="asc-modal-panel" style="max-width: 500px; width: 90%;">
+            <h2 class="asc-modal-title">Confirm Your Order</h2>
+            <div id="checkoutDetailsContent" style="text-align: left; background: #F9F4F0; padding: 15px; border-radius: 8px; font-family: 'Satoshi', sans-serif; font-size: 14px; color: #2B1410; line-height: 1.6;">
+                </div>
+            
+            <div class="asc-modal-actions" style="margin-top: 20px; gap: 10px;">
+                <button class="asc-save-btn" id="finalConfirmBtn" style="flex: 1;">YES, PLACE ORDER</button>
+                <button class="asc-cancel-btn" onclick="closeCheckoutConfirm()" style="flex: 1;">BACK</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Admin Profile</title>
+
+    <link rel="stylesheet" href=".css/admin-profile.css">
+    <script type="module" src=".js/inject-admin-header.js"></script>
+    <script type="module" src=".js/admin-header.js"></script>
+    <script type="module" src=".js/admin-profile.js"></script>
+</head>
+<body>
+    <div id="admin-header-placeholder"></div>
+    <main class="aprof-main">
+        <h1 class="aprof-title">PROFILE</h1>
+        <div class="aprof-avatar-wrap">
+            <img src="assets/icons/logo-nobg.png" alt="Admin Avatar" class="aprof-avatar"
+                 onerror="this.src='assets/icons/user.png'">
+        </div>
+        <div class="aprof-columns">
+            <section class="aprof-section">
+                <h2 class="aprof-section-title">PERSONAL DETAILS</h2>
+                <div class="aprof-field-group">
+                    <label class="aprof-field-label">Full Name</label>
+                    <div class="aprof-field-box" id="nameBox">
+                        <span class="aprof-field-hint">Your display name</span>
+                        <div class="aprof-field-value-row">
+                            <input class="aprof-field-input" id="profileName"
+                                   type="text" disabled placeholder="Enter your name">
+                            <button class="aprof-edit-btn" onclick="toggleEdit('profileName')"
+                                    aria-label="Edit name">
+                                <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 0 0 0-1.42l-2.33-2.33a1 1 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="aprof-field-group">
+                    <label class="aprof-field-label">Email</label>
+                    <div class="aprof-field-box" id="emailBox">
+                        <span class="aprof-field-hint">This is the e-mail that will receive notifications</span>
+                        <div class="aprof-field-value-row">
+                            <input class="aprof-field-input" id="profileEmail"
+                                   type="email" disabled placeholder="your@email.com">
+                            <button class="aprof-edit-btn" onclick="toggleEdit('profileEmail')"
+                                    aria-label="Edit email">
+                                <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 0 0 0-1.42l-2.33-2.33a1 1 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="aprof-field-group">
+                    <label class="aprof-field-label">Password</label>
+                    <div class="aprof-field-box" id="passwordBox">
+                        <div class="aprof-field-value-row">
+                            <input class="aprof-field-input" id="profilePassword"
+                                   type="password" disabled placeholder="New password">
+                            <button class="aprof-edit-btn" onclick="toggleEdit('profilePassword')"
+                                    aria-label="Edit password">
+                                <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 0 0 0-1.42l-2.33-2.33a1 1 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="aprof-section">
+                <div class="aprof-role-section">
+                    <h2 class="aprof-section-title">ACCOUNT ROLE</h2>
+                    <div class="aprof-role-container">
+                        <div class="aprof-role-badge">
+                            <span class="role-dot"></span>
+                            <span id="adminRoleDisplay">Administrator</span>
+                        </div>
+                        <p class="aprof-role-description">Full access to order management and notifications.</p>
+                    </div>
+                </div>
+                <div class="aprof-info-cards">
+                    <div class="aprof-info-card">
+                        <span class="aprof-info-icon">📦</span>
+                        <div>
+                            <p class="aprof-info-label">Total Orders Managed</p>
+                            <p class="aprof-info-value" id="totalOrdersManaged">—</p>
+                        </div>
+                    </div>
+                    <div class="aprof-info-card">
+                        <span class="aprof-info-icon">📅</span>
+                        <div>
+                            <p class="aprof-info-label">Account Created</p>
+                            <p class="aprof-info-value" id="accountCreatedDate">—</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="aprof-danger-zone">
+                    <button class="aprof-logout-btn" id="adminLogoutBtn">
+                        Log Out
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Order History</title>
+
+    <link rel="stylesheet" href=".css/order-history.css">
+    <script type="module" src=".js/inject-components.js"></script>
+    <script type="module" src=".js/header.js"></script>
+    <script type="module" src=".js/order-history.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="order-history">
+        <div class="divider5"></div>
+        <div class="history-main-container">
+            <a href="profile.html" class="back-btn">
+                <img src="assets/icons/back.png" alt="Back" width="30">
+            </a>
+            <h1 class="page-title">ORDER <span class="highlight">HISTORY</span></h1>
+            <p class="history-subtitle">You can view all your orders here</p>
+            <div class="history-grid" id="historyGrid">
+                <p class="oh-empty">Loading your orders...</p>
+            </div>
+            <div id="histPagination"></div>
+        </div>
+    </main>
+
+    <div class="divider5"></div>
+    <div id="footer-placeholder"></div>
+    <div class="oh-modal-overlay" id="ohStatusModal">
+        <div class="oh-modal-panel">
+            <button class="oh-modal-close" id="ohModalClose" aria-label="Close">&times;</button>
+            <div class="oh-modal-status-row">
+                <span class="oh-modal-status-badge" id="ohModalStatus">PENDING</span>
+                <span class="oh-modal-ern">ERN# <strong id="ohModalERN">000000</strong></span>
+            </div>
+            <div class="oh-receipt-paper">
+                <div class="oh-receipt-header">
+                    <img src="assets/icons/logo-nobg.png" class="oh-receipt-logo" alt="Bake King" onerror="this.style.display='none'">
+                    <div class="oh-receipt-company">
+                        <h2>Bake King Metal Fabrication Services</h2>
+                        <p>280 West Berkely Street California Village, Barangay San Bartolome</p>
+                        <p>Novaliches, Quezon City, 1116</p>
+                        <p><strong>Gian Carlo So &ndash; CEO / Owner</strong></p>
+                    </div>
+                </div>
+                <div class="oh-receipt-body">
+                    <div class="oh-receipt-left">
+                        <div class="oh-receipt-line">Received from&nbsp;<span class="oh-ru" id="ohRName"></span></div>
+                        <div class="oh-receipt-line">with address at&nbsp;<span class="oh-ru" id="ohRAddress"></span></div>
+                        <div class="oh-receipt-line">engaged in business style of&nbsp;<span class="oh-ru">N/A</span></div>
+                        <div class="oh-receipt-line">the sum of&nbsp;<span class="oh-ru">Philippine Pesos Only</span></div>
+                        <div class="oh-receipt-line oh-receipt-indent">(&#8369;&nbsp;<span class="oh-ru" id="ohRSumNum"></span>)</div>
+                        <div class="oh-receipt-line">in full/partial payment for&nbsp;<span class="oh-ru" id="ohRItem"></span></div>
+                        <div class="oh-receipt-date" id="ohRDate"></div>
+                        <div class="oh-receipt-sig">
+                            <div class="oh-sig-wrapper" style="position: relative; display: inline-block; text-align: center;">
+                                <img src="assets/signatures/angel-jade-so.png" alt="Signature" class="oh-digital-sig" 
+                                    style="position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); height: 50px; pointer-events: none;"
+                                    onerror="this.style.display='none'">
+                                <div class="oh-sig-line" style="border-bottom: 1px solid #000; width: 200px; margin-bottom: 5px;"></div>
+                                <p style="margin: 0; font-weight: 800; font-size: 13px; text-transform: uppercase; color: #2B1410;">
+                                    ANGEL JADE SO
+                                </p>
+                            </div>
+                            <p style="margin: 0; font-size: 10px; color: #666;">Admin / Authorized Representative</p>
+                        </div>
+                    </div>
+                    <div class="oh-receipt-right">
+                        <table class="oh-receipt-table">
+                            <thead>
+                                <tr>
+                                    <th>QTY</th>
+                                    <th>ITEM</th>
+                                    <th>PRICE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="ohRQty">1</td>
+                                    <td>
+                                        <strong id="ohRProdName"></strong>
+                                        <span id="ohRProdDetails" class="oh-detail-small"></span>
+                                    </td>
+                                    <td id="ohRProdPrice">₱0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="oh-divider"></div>
+                        <div class="oh-row-flex">
+                            <strong>DELIVERY FEE</strong>
+                            <span id="ohRDelivery">₱0</span>
+                        </div>
+                        <div class="oh-divider oh-divider-thick"></div>
+                        <div class="oh-row-flex oh-total-row">
+                            <strong>TOTAL</strong>
+                            <div class="oh-total-right">
+                                <span id="ohRTotal">₱0</span>
+                                <p id="ohRPayment">Paid via COD</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ohConfirmModal" class="oh-modal-overlay">
+        <div class="oh-confirm-card">
+            <div class="oh-confirm-icon">✔</div>
+            <h2>Order Received?</h2>
+            <p>Please confirm that you have received your package in good condition. This action cannot be undone.</p>
+            <div class="oh-confirm-actions">
+                <button id="ohConfirmCancel" class="oh-confirm-btn-secondary">CANCEL</button>
+                <button id="ohConfirmBtn" class="oh-confirm-btn-primary">YES, RECEIVED</button>
+            </div>
+        </div>
+    </div>
+    <div id="pdmReviewModal" class="pdm-modal pdm-hidden" style="position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center;">
+        <div style="background: #FFF5E1; padding: 30px; border-radius: 20px; width: 90%; max-width: 450px; position: relative; border: 2px solid #2B1410;">
+            <span id="closeReview" style="position: absolute; right: 20px; top: 15px; cursor: pointer; font-size: 24px; font-weight: bold;">&times;</span>
+            <h2 style="font-family: 'Satoshi-Bold'; color: #2B1410; margin-bottom: 10px;">Post a Review</h2>
+            <p id="reviewProductName" style="font-family: 'Satoshi'; font-size: 14px; margin-bottom: 20px; opacity: 0.7;"></p>
+            <div class="star-rating" style="display: flex; gap: 5px; margin-bottom: 20px; font-size: 30px; color: #CCC; cursor: pointer;">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <textarea id="reviewText" placeholder="Write your experience with this product..." style="width: 100%; height: 120px; padding: 12px; border-radius: 10px; border: 1px solid #DDD; margin-bottom: 20px; font-family: 'Satoshi'; outline: none;"></textarea>
+            <button id="submitReviewBtn" style="width: 100%; background: #FF8800; color: white; padding: 12px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">SUBMIT REVIEW</button>
+        </div>
+    </div>
+</body>
+</html>

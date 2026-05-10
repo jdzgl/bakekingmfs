@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Bake King</title>
+    
+    <link rel="stylesheet" href=".css/admin-header.css">
+    <script type="module" src=".js/admin-header.js"></script>
+</head>
+<body>
+    <header class="adm-header">
+        <div class="adm-header-inner">
+            <button class="mobile-menu-btn" id="admMobileMenuBtn" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="admin-dashboard.html" class="adm-logo">
+                <img src="assets/icons/logo-nobg.png" alt="Bake King" class="adm-logo-img"
+                    onerror="this.style.display='none'">
+                <span class="adm-logo-text">BAKE KING</span>
+            </a>
+            <nav class="adm-nav">
+                <a href="admin-dashboard.html" class="adm-nav-link adm-nav-active">Home</a>
+                <a href="admin-order-history.html" class="adm-nav-link">Order History</a>
+                <a href="admin-shop.html" class="adm-nav-link">Shop</a>
+            </nav>
+            <div class="adm-header-icons">
+                <a href="admin-notifications.html" class="adm-icon-btn" id="admNotifBtn" aria-label="Notifications">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="adm-header-badge" id="notifUnreadCount" style="display: none;">0</span>
+                </a>
+                <a href="admin-profile.html" class="adm-icon-btn" id="admProfileBtn" aria-label="Profile">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="sidebar-drawer" id="admSidebar">
+            <div class="sidebar-head">
+                <span class="sidebar-logo-text">ADMIN PANEL</span>
+                <button class="sidebar-close-btn" id="admSidebarClose">&times;</button>
+            </div>
+            <div class="sidebar-user-block">
+                <img src="assets/icons/user.png" alt="Admin" class="sidebar-user-avatar">
+                <span class="sidebar-user-name" id="admUserName">Admin User</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="sidebar-link">Dashboard</a>
+                <a href="admin-order-history.html" class="sidebar-link">Order History</a>
+                <div class="sidebar-divider"></div>
+                <a href="shop.html" class="sidebar-link" target="_blank">View Shop</a>
+                <a href="#" class="sidebar-link sidebar-logout-btn" id="admLogout">Logout</a>
+            </nav>
+        </div>
+        <div class="sidebar-overlay" id="admOverlay"></div>
+    </header>
+</body>
+</html>

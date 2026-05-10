@@ -1,0 +1,282 @@
+:root {
+    --primary-orange: #FF8800;
+    --light-beige: #FFF5E1;
+    --dark-brown: #2B1410;
+    --beige: #F5E6CC;
+    --dark-orange: #ff8c08;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--light-beige);
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.profile-main {
+    margin-top: 80px;
+}
+
+.divider5 {
+    width: 100%;
+    height: 25px;
+    background-image: url('../assets/dividers/5.png');
+    background-repeat: repeat-x;
+    background-size: auto 130px;
+    position: relative;
+    display: flex;
+}
+
+.profile-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.profile-title {
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--dark-brown);
+    margin-bottom: 20px;
+    font-family: 'Integral-CF-Bold';
+    transition: transform 0.5s ease;
+}
+
+.profile-title .highlight {
+    color: var(--primary-orange);
+    text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4);
+    -webkit-text-stroke: 1.5px var(--dark-brown);
+    display: inline-block;
+    transition: transform 0.5s ease;
+}
+
+.profile-title:hover .highlight {
+    transform: scale(1.1) rotate(-2deg);
+}
+
+.profile-avatar img {
+    width: 180px;
+    margin-bottom: 40px;
+    transition: transform var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-avatar img:hover {
+    transform: scale(1.05) rotate(3deg);
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    text-align: left;
+}
+
+.profile-section .section-title {
+    color: var(--primary-orange);
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    font-family: 'Integral-CF-Bold';
+}
+
+.field-group {
+    margin-bottom: 20px;
+}
+
+.field-group label {
+    display: block;
+    color: var(--primary-orange);
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: 'Integral-CF-Bold';
+}
+
+.input-container {
+    position: relative;
+    border: 2px solid var(--primary-orange);
+    border-radius: 15px;
+    padding: 10px 20px;
+    background: var(--light-beige);
+    transition: all var(--transition-speed) ease;
+}
+
+.input-container:focus-within {
+    border-color: var(--dark-brown);
+    box-shadow: 0 5px 15px rgba(43, 20, 16, 0.1);
+    transform: translateY(-2px);
+}
+
+.input-hint {
+    display: block;
+    color: var(--primary-orange);
+    font-style: italic;
+    font-size: 12px;
+    font-family: 'Satoshi';
+}
+
+.input-container input {
+    width: 90%;
+    border: none;
+    font-size: 18px;
+    color: var(--primary-orange);
+    font-weight: bold;
+    outline: none;
+    background: transparent;
+}
+
+.edit-icon-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--beige);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-icon-btn:hover {
+    background: var(--primary-orange);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.edit-icon-btn:active {
+    transform: translateY(-50%) scale(0.9);
+}
+
+.edit-icon-btn img {
+    max-width: 18px;
+    max-height: 19px;
+}
+
+.nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 2px solid var(--primary-orange);
+    border-radius: 15px;
+    padding: 20px;
+    background: var(--light-beige);
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--primary-orange);
+    transition: all var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-row:hover {
+    background-color: var(--beige);
+    border-color: var(--dark-brown);
+    transform: translateX(10px);
+    box-shadow: -5px 5px 0px var(--primary-orange);
+}
+
+.arrow-icon {
+    width: 24px;
+    transition: transform var(--transition-speed) ease;
+}
+
+.nav-row:hover .arrow-icon {
+    transform: translateX(5px);
+}
+
+.logout-btn-full {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--dark-brown);
+    color: var(--light-beige);
+    border: none;
+    border-radius: 15px;
+    font-weight: 900;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logout-btn-full:hover {
+    background-color: var(--primary-orange);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 136, 0, 0.3);
+}
+
+.logout-btn-full:active {
+    transform: translateY(2px) scale(0.98);
+}
+
+@media (max-width: 1100px) {
+    .profile-container { max-width: 90%; padding: 20px; }
+    .profile-grid { gap: 40px; }
+    .profile-title { font-size: 40px; }
+}
+
+@media (max-width: 768px) {
+    .profile-title { font-size: 32px; margin-bottom: 15px; }
+    .profile-avatar img { width: 140px; margin-bottom: 30px; }
+    .profile-grid { grid-template-columns: 1fr; gap: 30px; }
+    .section-title { font-size: 20px; text-align: center; }
+    .input-container input { font-size: 16px; width: 85%; }
+    .nav-row { padding: 15px; font-size: 14px; }
+    .logout-btn-full { font-size: 16px; padding: 12px; }
+}
+
+@media (max-width: 480px) {
+    .profile-title { font-size: 28px; }
+    .edit-icon-btn { width: 30px; height: 30px; right: 10px; }
+    .input-container { padding: 10px 15px; }
+}
+
+.reviews-container::-webkit-scrollbar { height: 4px; }
+.reviews-container::-webkit-scrollbar-thumb {
+    background: var(--primary-orange);
+    border-radius: 10px;
+}
+
+@keyframes scrollText {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf') format('opentype');
+    font-weight: 300 900;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi-Bold';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-display: swap;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Integral-CF-Bold';
+    src: url('../assets/fonts/integral-cf/Demo_Fonts/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
+    font-weight: 700;
+    font-display: swap;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Satoshi-Black';
+    src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Black.otf') format('opentype');
+    font-weight: 900;
+    font-display: swap;
+    font-style: normal;
+}

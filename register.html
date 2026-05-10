@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Create Account</title>
+    
+    <link rel="stylesheet" href=".css/register.css">
+    <script type="module" src=".js/register.js"></script>
+</head>
+<body class="login-page">
+    <main class="login-container">
+        <div class="login-brand">
+            <img src="assets/icons/logo-nobg.png" alt="Bake King Logo" class="large-logo">
+        </div>
+        <section class="login-form-card register-form-card">
+            <h1 class="login-title">SIGN UP</h1>
+            <p class="login-subtitle">Create your Bake King account</p>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                        autocomplete="name"
+                    >
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email here"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+                <div class="divider-line">
+                    <hr><span>set a password</span><hr>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                            autocomplete="new-password"
+                        >
+                        <button type="button" class="toggle-password" data-target="password" aria-label="Show password">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+                    <span class="strength-label" id="strengthLabel"></span>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Re-enter your password"
+                            required
+                            autocomplete="new-password"
+                        >
+                        <button type="button" class="toggle-password" data-target="confirmPassword" aria-label="Show confirm password">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="match-msg" id="matchMsg"></span>
+                </div>
+                <p class="terms-link-text">
+                    By creating an account, you agree to our
+                    <a href="javascript:void(0)" id="openTerms">Terms and Conditions</a>.
+                </p>
+                <button type="submit" id="registerBtn" class="login-btn">CREATE ACCOUNT</button>
+            </form>
+            <p class="signin-redirect">
+                Already have an account? <a href="login.html">Log In</a>
+            </p>
+        </section>
+    </main>
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <h2 class="section-title">TERMS AND <span class="highlight">CONDITIONS</span></h2>
+            <div class="terms-scroll-box">
+                <h3>1. Acceptance of Terms</h3>
+                <p>By accessing Bake King Metal Fabrication Services, you agree to comply with our service standards and purchase policies.</p>
+                <h3>2. Equipment Warranty</h3>
+                <p>We provide a 1-year service warranty on ovens, bread slicers, and rollers covering motor and mechanical components. Mixers come with a 7-day motor replacement and 1-year service warranty. Wear-and-tear items such as bankas, stainless tables, tray racks, and crushers carry no warranty.</p>
+                <h3>3. Shipping and Delivery</h3>
+                <p>We offer nationwide shipping and delivery. Delivery fees are determined based on your province and city.</p>
+                <h3>4. Payment Methods</h3>
+                <p>We accept Cash on Delivery (COD) and Bank Transfer only. Installment payments are not available at this time.</p>
+                <h3>5. Custom Orders</h3>
+                <p>All items are customizable to your specific preferences. Confirmation of your invoice is required before fabrication begins.</p>
+                <h3>6. Account Responsibility</h3>
+                <p>You are responsible for keeping your account credentials secure. Bake King is not liable for unauthorized access resulting from your failure to protect your login information.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="acceptTerms" class="accept-btn">I ACCEPT</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p class="copyright">Bake King Metal Fabrication Services © 2018</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Admin Dashboard</title>
+    
+    <link rel="stylesheet" href=".css/admin-dashboard.css">
+    <script type="module" src=".js/inject-admin-header.js"></script>
+    <script type="module" src=".js/admin-header.js"></script>
+    <script type="module" src=".js/admin-dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="admin-header-placeholder"></div>
+    <main class="adm-main">
+        <div class="adm-page-header">
+            <h1 class="adm-title">CURRENT <span class="adm-highlight">ORDERS</span></h1>
+            <p class="adm-subtitle">View all pending orders here</p>
+        </div>
+        <section class="adm-stats-container">
+            <div class="adm-graph-header">
+                <h2 class="adm-graph-title">Sales Overview</h2>
+                <div class="adm-graph-filters">
+                    <button class="graph-filter-btn active" data-range="week">Week</button>
+                    <button class="graph-filter-btn" data-range="month">Month</button>
+                    <button class="graph-filter-btn" data-range="year">Year</button>
+                    <button class="graph-filter-btn" data-range="all">All Time</button>
+                </div>
+            </div>
+            <div class="adm-canvas-wrapper">
+                <canvas id="salesChart"></canvas>
+            </div>
+            <div class="adm-product-breakdown">
+                <h3>Product Revenue Breakdown</h3>
+                <div id="productRevenueList"></div>
+            </div>
+        </section>
+        <div class="adm-filter-bar">
+            <select id="admStatusFilter" class="adm-filter-select">
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="in_production">In Production</option>
+                <option value="ready">Ready for Delivery</option>
+                <option value="delivered">Delivered</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+            <input type="text" id="admSearch" class="adm-search"
+                   placeholder="Search by product or customer...">
+            <span class="adm-count" id="admOrderCount">0 orders</span>
+        </div>
+        <div class="adm-order-list" id="admOrderList">
+            <p class="adm-empty">Loading orders...</p>
+        </div>
+    </main>
+    <div class="adm-modal-overlay" id="admModal">
+        <div class="adm-modal-panel">
+            <button class="adm-modal-close" id="admModalClose">&times;</button>
+            <div class="adm-modal-status-row">
+                <span class="adm-modal-badge" id="admModalBadge">PENDING</span>
+                <span class="adm-modal-ern">ERN# <strong id="admModalERN"></strong></span>
+            </div>
+            <div class="adm-receipt-paper" id="admReceiptPaper">
+                <div class="adm-receipt-header">
+                    <img src="assets/icons/logo-nobg.png" class="adm-receipt-logo" alt="Bake King" onerror="this.style.display='none'">
+                    <div class="adm-receipt-company">
+                        <h2>Bake King Metal Fabrication Services</h2>
+                        <p>280 West Berkely Street California Village, Barangay San Bartolome</p>
+                        <p>Novaliches, Quezon City, 1116</p>
+                        <p><strong>Gian Carlo So &ndash; CEO / Owner</strong></p>
+                    </div>
+                </div>
+                <div class="adm-receipt-body">
+                    <div class="adm-receipt-left">
+                        <div class="adm-rline">Received from&nbsp;<span class="adm-ru" id="admRName"></span></div>
+                        <div class="adm-rline">with address at&nbsp;<span class="adm-ru" id="admRAddress"></span></div>
+                        <div class="adm-rline">contact number&nbsp;<span class="adm-ru" id="admRContact"></span></div>
+                        <div class="adm-rline">the sum of&nbsp;<span class="adm-ru">Philippine Pesos Only</span></div>
+                        <div class="adm-rline adm-rindent">(&#8369;&nbsp;<span class="adm-ru" id="admRSumNum"></span>)</div>
+                        <div class="adm-rline">in full/partial payment for&nbsp;<span class="adm-ru" id="admRItem"></span></div>
+                        <div class="adm-rsig">
+                            <div class="adm-sig-wrapper" style="position: relative; display: inline-block; text-align: center;">
+                                <img src="assets/signatures/angel-jade-so.png" alt="Signature" class="adm-digital-sig" 
+                                    style="position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); height: 50px; pointer-events: none;"
+                                    onerror="this.style.display='none'">
+                                <div class="adm-sig-line" style="border-bottom: 1px solid #000; width: 200px; margin-bottom: 5px;"></div>
+                                <p style="margin: 0; font-weight: 800; font-size: 13px; text-transform: uppercase; color: #2B1410;">
+                                    ANGEL JADE SO
+                                </p>
+                            </div>
+                            <p style="margin: 0; font-size: 10px; color: #666;">Admin / Authorized Representative</p>
+                        </div>
+                    </div>
+                    <div class="adm-receipt-right">
+                        <table class="adm-rtable">
+                            <thead>
+                                <tr><th>QTY</th><th>ITEM</th><th>PRICE</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="admRQty">1</td>
+                                    <td>
+                                        <strong id="admRProdName"></strong>
+                                        <span id="admRProdDetails" class="adm-detail-small"></span>
+                                    </td>
+                                    <td id="admRProdPrice">₱0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="adm-rdivider"></div>
+                        <div class="adm-rflex">
+                            <strong>DELIVERY FEE</strong>
+                            <span id="admRDelivery">₱0</span>
+                        </div>
+                        <div class="adm-rdivider adm-rdivider-thick"></div>
+                        <div class="adm-rflex adm-rtotal">
+                            <strong>TOTAL</strong>
+                            <div class="adm-rtotal-right">
+                                <span id="admRTotal">₱0</span>
+                                <p id="admRPaymentMethod" style="font-size: 10px; color: #666; margin: 0;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="admReceiptImageContainer" style="display:none; margin-top:20px; border-top: 2px dashed #ddd; padding-top:15px; text-align:center;">
+                    <p style="font-family:'Satoshi',sans-serif; font-weight:700; font-size:12px; margin-bottom:10px;">CUSTOMER PAYMENT PROOF</p>
+                    <img id="admReceiptImg" src="" alt="Receipt" style="max-width:100%; max-height:300px; border-radius:8px; border: 1px solid #ccc; cursor:zoom-in;" onclick="window.open(this.src)">
+                </div>
+            </div>
+            <div class="adm-modal-actions" style="display:flex; gap:10px; margin-top:20px;">
+                <button id="admCancelOrderBtn" style="flex:1; background:#b71c1c; color:white; border:none; padding:12px; border-radius:8px; font-weight:700; cursor:pointer; display:none;">
+                    CANCEL ORDER (FRAUD)
+                </button>
+                <button onclick="closeModal()" style="flex:1; background:#2B1410; color:white; border:none; padding:12px; border-radius:8px; font-weight:700; cursor:pointer;">
+                    CLOSE
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="adm-modal-overlay" id="admConfirmModal">
+        <div class="adm-modal-panel adm-confirm-box">
+            <div class="adm-confirm-content">
+                <div class="adm-confirm-icon">⚠️</div>
+                <h3>Cancel Order?</h3>
+                <p>Are you sure you want to mark this order as <strong>Fraudulent/Cancelled</strong>? This action will notify the customer and cannot be undone.</p>
+            </div>
+            <div class="adm-modal-actions">
+                <button id="admConfirmKeepBtn" class="adm-btn-secondary">Keep Order</button>
+                <button id="admConfirmCancelBtn" class="adm-btn-danger">Yes, Cancel Order</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

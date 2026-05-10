@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake King - Admin Notifications</title>
+    
+    <link rel="stylesheet" href=".css/admin-notifications.css">
+    <script type="module" src=".js/inject-admin-header.js"></script>
+    <script type="module" src=".js/admin-header.js"></script>
+    <script type="module" src=".js/notifications.js"></script>
+    <script type="module" src=".js/admin-post-notif.js"></script> 
+</head>
+<body>
+    <div id="admin-header-placeholder"></div>
+    <main class="notif-main">
+        <div class="notif-page-header">
+            <div class="notif-title-row">
+                <h1 class="notif-title">ADMIN <span>NOTIFICATIONS</span></h1>
+                <p>Track order updates — changes reflect instantly for administrators</p>
+            </div>
+            <div class="notif-header-actions">
+                <div class="notif-center-actions">
+                    <button class="notif-post-btn" onclick="openPostModal()">
+                        <span class="btn-icon">+</span> Post Announcement
+                    </button>
+                </div>
+                <div class="notif-right-actions">
+                    <span class="notif-unread-count" id="notifUnreadCount"></span>
+                    <button class="notif-mark-all-btn" id="markAllReadBtn">Mark all as read</button>
+                </div>
+            </div>
+        </div>
+        <div class="notif-tabs" id="notifTabs">
+            <button class="notif-tab notif-tab-active" data-filter="all">All</button>
+            <button class="notif-tab" data-filter="new_order">Orders</button>
+            <button class="notif-tab" data-filter="status_change">Status Updates</button>
+            <button class="notif-tab" data-filter="order_completed">Completed</button>
+            <button class="notif-tab" data-filter="order_cancelled">Cancelled</button>
+            <button class="notif-tab" data-filter="general">Announcements</button>
+        </div>
+        <div class="notif-list" id="notifList">
+            <p class="notif-empty">Loading notifications...</p>
+        </div>
+        <div class="notif-load-more-container" id="loadMoreContainer">
+            <button class="notif-load-more-btn" id="loadMoreBtn">
+                Load more notifications
+                <span class="btn-icon">↓</span>
+            </button>
+        </div>
+        <div id="postNotifModal" class="pdm-modal-overlay pdm-hidden">
+            <div class="pdm-summary-card">
+                <h3>Post General Announcement</h3>
+                <div class="post-form">
+                    <div class="input-group">
+                        <label>Announcement Title</label>
+                        <input type="text" id="postNotifTitle" placeholder="e.g., Holiday Schedule">
+                    </div>
+                    <div class="input-group">
+                        <label>Message Content</label>
+                        <textarea id="postNotifMessage" rows="4" placeholder="Write your message here..."></textarea>
+                    </div>
+                </div>
+                <div class="pdm-summary-actions">
+                    <button onclick="closePostModal()" class="btn-cancel">Cancel</button>
+                    <button id="submitPostBtn" onclick="submitGeneralAnnouncement()" class="btn-confirm">Post to Customers</button>
+                </div>
+            </div>
+        </div>
+        <div id="toast" class="ap-toast"></div>
+    </main>
+</body>
+</html>
