@@ -351,4 +351,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('admStatusFilter')?.addEventListener('change', (e) => { activeFilter = e.target.value; renderOrders(); });
     document.getElementById('admSearch')?.addEventListener('input', (e) => { searchQuery = e.target.value.trim(); renderOrders(); });
     document.getElementById('admModalClose')?.addEventListener('click', closeModal);
+    document.getElementById('admCloseBtn')?.addEventListener('click', closeModal);
 });
