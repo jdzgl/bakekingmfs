@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (userDoc.exists() && userDoc.data().role === "Admin") {
                     window.location.href = "admin-dashboard.html";
                 } else {
-                    window.location.href = "homepage.html";
+                    window.location.href = "index.html";
                 }
             } catch (error) {
                 showToast("Login failed: " + error.message);

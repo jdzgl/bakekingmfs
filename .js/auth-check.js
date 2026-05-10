@@ -11,11 +11,11 @@ async function handleRouting(user) {
         if (userDoc.exists() && userData.role === 'Admin') {
             window.location.href = 'admin-dashboard.html';
         } else {
-            window.location.href = 'homepage.html';
+            window.location.href = 'index.html';
         }
     } catch (error) {
         console.error("Routing Error:", error);
-        window.location.href = 'homepage.html';
+        window.location.href = 'index.html';
     }
 }
 
