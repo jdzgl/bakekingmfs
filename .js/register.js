@@ -1,6 +1,6 @@
 import { auth, db } from './firebase-config.js';
-import { createUserWithEmailAndPassword,  updateProfile,  sendEmailVerification,  onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import {  doc,  setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { createUserWithEmailAndPassword,  updateProfile,  sendEmailVerification,  onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.11.1/firebase-auth.js";
+import {  doc,  setDoc } from "https://www.gstatic.com/firebasejs/12.11.1/firebase-firestore.js";
 import { showToast } from './toast-util.js';
 
 onAuthStateChanged(auth, (user) => {
