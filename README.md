@@ -2,7 +2,7 @@ BAKE KING METAL FABRICATION SERVICES
 
 Local Setup Instructions
 1. File Organization
-Before running the site, ensure your local directory matches the project structure. If images or styles are missing, check that the paths in your HTML (like href="bakekingStyle.css") match where you saved the files.
+Before running the site, ensure your local directory matches the project structure. If images or styles are missing, check that the paths in your HTML (like href="homepage.css") match where you saved the files.
 
 2. Linking Firebase
 The database is already live, but your local copy needs the config keys to talk to it.
