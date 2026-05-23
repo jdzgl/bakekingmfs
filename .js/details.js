@@ -91,33 +91,73 @@ async function populateStep1(data) {
     if (warEl) warEl.textContent = specs.warranty || '1-Year Service Warranty (No Dents)';
 
     const variantList = document.getElementById('pdmVariantList');
+
     if (variantList) {
         variantList.innerHTML = '';
+
         const variants = data.variant || data.variants || [];
+
         if (variants.length > 0) {
             selectedVariant = variants[0];
+
             variants.forEach((v, i) => {
-                const row = document.createElement('div');
-                row.className = `pdm-variant-row${i === 0 ? ' pdm-variant-selected' : ''}`;
-                const dim = v.dimension
-                    ? `${v.dimension.length} x ${v.dimension.width} x ${v.dimension.height} in.`
+
+                const hasValidDimension =
+                    v.dimension &&
+                    (
+                        Number(v.dimension.length) > 0 ||
+                        Number(v.dimension.width) > 0 ||
+                        Number(v.dimension.height) > 0
+                    );
+
+                const dim = hasValidDimension
+                    ? `${v.dimension.length} × ${v.dimension.width} × ${v.dimension.height} in.`
                     : '';
+
+                const row = document.createElement('div');
+
+                row.className = `pdm-variant-row ${i === 0 ? 'pdm-variant-selected' : ''}`;
+
                 row.innerHTML = `
                     <div class="pdm-variant-left">
-                        <span class="pdm-variant-name">${v.type || `Variant ${i + 1}`}</span>
-                        ${dim ? `<span class="pdm-variant-size">${dim}</span>` : ''}
+                        <span class="pdm-variant-name">
+                            ${v.type || `Variant ${i + 1}`}
+                        </span>
+
+                        ${dim ? `<span class="pdm-variant-size">${dim}</span>` : ``}
                     </div>
-                    <span class="pdm-variant-price">₱${Number(v.price).toLocaleString()}</span>`;
+
+                    <div class="pdm-variant-right">
+                        <span class="pdm-variant-price">
+                            ₱${Number(v.price || 0).toLocaleString()}
+                        </span>
+                        <span class="pdm-variant-arrow">›</span>
+                    </div>
+                `;
+
                 row.addEventListener('click', () => {
-                    document.querySelectorAll('.pdm-variant-row').forEach(r => r.classList.remove('pdm-variant-selected'));
+
+                    document.querySelectorAll('.pdm-variant-row')
+                        .forEach(r => r.classList.remove('pdm-variant-selected'));
+
                     row.classList.add('pdm-variant-selected');
+
                     selectedVariant = v;
-                    if (priceEl) priceEl.textContent = `₱${Number(v.price).toLocaleString()}`;
+
+                    if (priceEl) {
+                        priceEl.textContent = `₱${Number(v.price || 0).toLocaleString()}`;
+                    }
                 });
+
                 variantList.appendChild(row);
             });
+
         } else {
-            variantList.innerHTML = `<p style="font-family:'Satoshi';font-size:13px;opacity:0.5;">No variants available.</p>`;
+            variantList.innerHTML = `
+                <p class="pdm-empty-variant">
+                    No variants available.
+                </p>
+            `;
         }
     }
 
