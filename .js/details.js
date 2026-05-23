@@ -195,12 +195,14 @@ async function populateReviews(productId) {
     reviewList.innerHTML = '';
 
     try {
-        const reviewSnap = await getDocs(
-            query(
-                collection(db, 'products', productId, 'reviews'),
-                orderBy('createdAt', 'desc')
-            )
+        const reviewsRef = collection(db, 'products', productId, 'reviews');
+        
+        const q = query(
+            reviewsRef,
+            orderBy('timestamp', 'desc')
         );
+
+        const reviewSnap = await getDocs(q);
 
         if (reviewSnap.empty) {
             reviewList.innerHTML = `<p style="font-family:'Satoshi';font-size:13px;opacity:0.5;padding:10px 0;">No reviews yet.</p>`;
@@ -208,16 +210,19 @@ async function populateReviews(productId) {
         }
 
         reviewSnap.forEach(d => {
-            const r     = d.data();
+            const r = d.data();
             const stars = '★'.repeat(Math.min(Number(r.rating) || 5, 5));
-            const date  = r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString() : 'Recent';
-            const card  = document.createElement('div');
+            
+            const date = r.timestamp?.toDate ? r.timestamp.toDate().toLocaleDateString() : 'Recent';
+            
+            const card = document.createElement('div');
             card.className = 'pdm-review-card';
             card.innerHTML = `
                 <div style="color:#FF8800;margin-bottom:4px;">${stars}</div>
-                <p style="font-family:'Satoshi-Bold';font-size:13px;font-weight:700;color:#2B1410;margin-bottom:2px;">${r.name || r.userName || 'Customer'}</p>
+                <p style="font-family:'Satoshi-Bold';font-size:13px;font-weight:700;color:#2B1410;margin-bottom:2px;">${r.userName || r.name || 'Customer'}</p>
                 <p style="font-family:'Satoshi';font-size:11px;color:#2B1410;opacity:0.45;margin-bottom:6px;">${date}</p>
-                <p style="font-family:'Satoshi';font-size:12px;color:#2B1410;line-height:1.5;opacity:0.8;">"${r.text || r.comment || ''}"</p>`;
+                <p style="font-family:'Satoshi';font-size:12px;color:#2B1410;line-height:1.5;opacity:0.8;">"${r.comment || r.text || ''}"</p>
+            `;
             reviewList.appendChild(card);
         });
     } catch (e) {

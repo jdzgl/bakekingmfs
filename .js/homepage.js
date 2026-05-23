@@ -27,9 +27,15 @@ async function fetchProductReviews() {
         const reviewsResults = await Promise.all(reviewPromises);
         allReviews = reviewsResults.flat();
 
-        if (allReviews.length >= 3) {
+        if (allReviews.length > 0) {
             reviewsContainer.innerHTML = '';
-            allReviews.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+            
+            allReviews.sort((a, b) => {
+                const timeB = b.timestamp?.seconds || 0;
+                const timeA = a.timestamp?.seconds || 0;
+                return timeB - timeA;
+            });
+
             const displayReviews = allReviews.slice(0, 6);
 
             displayReviews.forEach(review => {
@@ -39,14 +45,14 @@ async function fetchProductReviews() {
                 
                 card.innerHTML = `
                     <div class="stars">${stars}</div>
-                    <h3>${review.userName || ""}</h3>
+                    <h3>${review.userName || "Verified Buyer"}</h3>
                     <p>"${review.comment || review.text || ""}"</p>
                 `;
                 reviewsContainer.appendChild(card);
             });
         }
     } catch (error) {
-        console.error("Fetch error:", error);
+        console.error("Subcollection Fetch Exception:", error);
     }
 }
 
@@ -79,19 +85,33 @@ async function handleNewsletter() {
 }
 
 function handleProductNavigation() {
-    const productArticles = document.querySelectorAll('.product-grid article');
+    const productArticles = document.querySelectorAll('.product-grid article, .category-card');
     
     productArticles.forEach(article => {
         article.addEventListener('click', () => {
-            const h3Text = article.querySelector('h3').textContent;
-            
-            if (h3Text === "VIEW MORE") {
-                window.location.href = 'shop.html';
+            if (article.classList.contains('view-more-card')) {
+                window.location.href = 'order-now.html';
                 return;
             }
 
-            let category = h3Text.includes('&') ? h3Text.split('&')[1].trim() : h3Text;
-            window.location.href = `shop.html?category=${encodeURIComponent(category)}`;
+            let categorySlug = '';
+
+            if (article.classList.contains('ovens-card')) {
+                categorySlug = 'Ovens';
+            } else if (article.classList.contains('mixers-card')) {
+                categorySlug = 'Mixers';
+            } else if (article.classList.contains('rollers-card')) {
+                categorySlug = 'Rollers'; 
+            } else if (article.classList.contains('packages-card')) {
+                categorySlug = 'Packages';
+            } else {
+                const h3Element = article.querySelector('h3');
+                if (!h3Element) return;
+                const text = h3Element.textContent.trim().toLowerCase();
+                categorySlug = text.includes('&') ? text.split('&')[1].trim() : text;
+            }
+
+            window.location.href = `shop.html?category=${encodeURIComponent(categorySlug)}`;
         });
     });
 }

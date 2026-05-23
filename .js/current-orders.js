@@ -195,7 +195,7 @@ function setupReviewModal() {
             try {
                 const user = auth.currentUser;
                 await addDoc(collection(db, 'products', activeProductId, 'reviews'), {
-                    userName: user.displayName || "Customer",
+                    userName: user.displayName || user.email?.split('@')[0] || "Verified Baker",
                     rating: selectedRating,
                     comment: comment,
                     timestamp: serverTimestamp()
