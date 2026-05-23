@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bake King - Order Now</title>
 
+    <link rel="icon" href="assets/icons/logo-nobg.png" type="image/png">
+
+    <link rel="stylesheet" href=".css/global.css">
     <link rel="stylesheet" href=".css/order-now.css">
     <link rel="stylesheet" href=".css/header.css">
-    <link rel="stylesheet" href=".css/global.css">
+    
     <script type="module" src=".js/auth-check.js"></script>
     <script type="module" src=".js/inject-components.js"></script>
     <script type="module" src=".js/header.js"></script>
@@ -15,20 +18,30 @@
 </head>
 <body>
     <div id="header-placeholder"></div>
+    
     <main class="order-now">
         <div class="divider5"></div>
+        
         <section id="products-catalog">
             <h2 class="section-title">
                 BROWSE BASED ON 
                 <br> 
                 WHAT YOU <span class="highlight">NEED</span>
             </h2>
+            
             <div class="catalog-grid" id="categoryGrid">
-                <p>Loading categories...</p>
+                <div class="catalog-loading-placeholder">Loading premium equipment categories...</div>
             </div>
         </section>
+        
         <div class="divider5"></div>
     </main>
+
+    <div id="order-modal-overlay" class="modal-overlay hidden">
+        <div class="modal-window animate-modal" id="dynamic-modal-content">
+            </div>
+    </div>
+
     <div id="footer-placeholder"></div>
 </body>
 </html>

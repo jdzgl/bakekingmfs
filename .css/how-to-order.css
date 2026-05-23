@@ -19,28 +19,6 @@ body {
     width: 100%;
 }
 
-.section-title {
-    color: var(--dark-brown);
-    font-size: 64px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
-    font-family: 'Integral-CF-Bold';
-    text-align: center;
-}
-
-.section-title .highlight {
-    color: var(--primary-orange);
-    text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 2px var(--dark-brown);
-    display: inline-block;
-    transition: transform 0.5s ease;
-}
-
-.section-title:hover .highlight {
-    transform: scale(1.1) rotate(-2deg);
-}
-
 .divider4 {
     width: 100%;
     height: 130px;
@@ -49,91 +27,6 @@ body {
     background-size: auto 130px;
     position: relative;
     display: flex;
-}
-
-#how-to-order {
-    padding: 40px 5% 80px 5%;
-    text-align: center;
-}
-
-.steps-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.step-card {
-    background-color: var(--dark-brown);
-    border-radius: 20px;
-    padding: 15px;
-    color: var(--primary-orange);
-    display: flex;
-    flex-direction: column;
-    min-height: 450px;
-    cursor: pointer;
-    border: 3px solid transparent;
-    transition: transform var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                box-shadow var(--transition-speed) ease,
-                background-color var(--transition-speed) ease,
-                border-color var(--transition-speed) ease;
-}
-
-.step-card:hover {
-    transform: translateY(-10px);
-    background-color: #3d1d17;
-    border-color: var(--primary-orange);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-.step-card:active {
-    transform: translateY(-2px) scale(0.98);
-}
-
-.step-image-placeholder {
-    background-color: transparent;
-    border-radius: 15px;
-    height: auto;
-    width: 100%;
-    margin-bottom: 20px;
-    overflow: hidden;
-}
-
-.card-photo {
-    max-width: 100%;
-    max-height: 250px;
-    justify-content: center;
-    border-radius: 15px;
-    border: 5px solid var(--primary-orange);
-    transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
-}
-
-.step-card:hover .card-photo {
-    transform: scale(1.05);
-    border-color: var(--light-beige);
-}
-
-.step-card p {
-    font-size: 18px;
-    line-height: 1.5;
-    text-align: center;
-    font-family: 'Satoshi';
-    transition: color var(--transition-speed) ease;
-}
-
-.step-card:hover p {
-    color: var(--light-beige);
-}
-
-.step-card strong {
-    display: block;
-    font-size: 24px;
-    margin-bottom: 10px;
-    font-family: 'Satoshi-Bold';
-    transition: transform var(--transition-speed) ease;
-}
-
-.step-card:hover strong {
-    transform: scale(1.1);
 }
 
 .divider5 {
@@ -146,65 +39,211 @@ body {
     display: flex;
 }
 
+#how-to-order {
+    padding: 50px 5% 90px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-text {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 60px;
+}
+
+.mini-label {
+    font-family: 'Satoshi-Bold';
+    color: var(--primary-orange);
+    letter-spacing: 2px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    color: var(--dark-brown);
+    font-size: 64px;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 20px;
+    font-family: 'Integral-CF-Bold';
+}
+
+.section-title .highlight {
+    color: var(--primary-orange);
+    -webkit-text-stroke: 2px var(--dark-brown);
+}
+
+.section-subtitle {
+    font-family: 'Satoshi';
+    font-size: 18px;
+    color: #6B564A;
+    line-height: 1.7;
+}
+
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.step-card {
+    position: relative;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,136,0,0.18);
+    border-radius: 28px;
+    overflow: hidden;
+    transition:
+        transform var(--transition-speed) ease,
+        box-shadow var(--transition-speed) ease,
+        border-color var(--transition-speed) ease;
+}
+
+.step-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255,136,0,0.4);
+    box-shadow: 0 18px 40px rgba(43, 20, 16, 0.12);
+}
+
+.step-number {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    width: 52px;
+    height: 52px;
+    background: var(--primary-orange);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Satoshi-Black';
+    font-size: 18px;
+    z-index: 2;
+    box-shadow: 0 8px 18px rgba(255,136,0,0.35);
+}
+
+.step-image-wrapper {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background: #F8E8CB;
+}
+
+.card-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.step-card:hover .card-photo {
+    transform: scale(1.05);
+}
+
+.step-content {
+    padding: 28px;
+    text-align: left;
+}
+
+.step-content h3 {
+    font-family: 'Satoshi-Black';
+    color: var(--dark-brown);
+    font-size: 28px;
+    margin-bottom: 14px;
+}
+
+.step-content p {
+    font-family: 'Satoshi';
+    color: #5A453A;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.step-content strong {
+    color: var(--dark-brown);
+    font-family: 'Satoshi-Bold';
+}
+
 @media (max-width: 1100px) {
-    .steps-container { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+    .steps-container {
+        grid-template-columns: 1fr;
+    }
+
+    .step-image-wrapper {
+        height: 320px;
+    }
 }
 
 @media (max-width: 768px) {
-    .divider4 { height: 80px; background-size: auto 80px; }
-    .divider5 { height: 20px; background-size: auto 100px; }
-    .steps-container { grid-template-columns: 1fr; gap: 10px; }
-    .step-card { flex-direction: row; min-height: auto; padding: 10px; align-items: center; text-align: left; gap: 15px; }
-    .step-card:hover { transform: translateX(10px); }
-    .step-image-placeholder { width: auto; height: 200px; margin-bottom: 0; flex-shrink: 0; }
-    .card-photo { width: auto; height: 200px; }
-    .step-card p { text-align: left; font-size: 14px; }
-    .step-card strong { font-size: 16px; margin-bottom: 2px; display: inline; }
+
+    #how-to-order {
+        padding: 40px 20px 70px;
+    }
+
+    .section-title {
+        font-size: 42px;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+    }
+
+    .step-image-wrapper {
+        height: 240px;
+    }
+
+    .step-content {
+        padding: 22px;
+    }
+
+    .step-content h3 {
+        font-size: 24px;
+    }
+
+    .step-content p {
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 480px) {
-    .section-title { font-size: 28px; }
-    .step-image-placeholder { width: auto; height: 100px; }
-    .card-photo { width: auto; height: 100px; }
-    .step-card p { font-size: 12px; }
-}
 
-.reviews-container::-webkit-scrollbar { height: 4px; }
-.reviews-container::-webkit-scrollbar-thumb {
-    background: var(--primary-orange);
-    border-radius: 10px;
-}
+    .section-title {
+        font-size: 32px;
+    }
 
-@keyframes scrollText {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    .mini-label {
+        font-size: 12px;
+    }
+
+    .step-image-wrapper {
+        height: 200px;
+    }
+
+    .step-number {
+        width: 44px;
+        height: 44px;
+        font-size: 16px;
+    }
 }
 
 @font-face {
     font-family: 'Satoshi';
     src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf') format('opentype');
-    font-weight: 300 900;
-    font-display: swap;
-    font-style: normal;
 }
 
 @font-face {
     font-family: 'Satoshi-Bold';
     src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf') format('opentype');
-    font-weight: 700;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Integral-CF-Bold';
-    src: url('../assets/fonts/integral-cf/Demo_Fonts/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
-    font-weight: 700;
-    font-display: swap;
 }
 
 @font-face {
     font-family: 'Satoshi-Black';
     src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Black.otf') format('opentype');
-    font-weight: 900;
-    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Integral-CF-Bold';
+    src: url('../assets/fonts/integral-cf/Demo_Fonts/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
 }

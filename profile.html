@@ -4,68 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bake King - Profile</title>
-    
+
     <link rel="stylesheet" href=".css/profile.css">
     <link rel="stylesheet" href=".css/header.css">
     <link rel="stylesheet" href=".css/global.css">
+
     <script type="module" src=".js/inject-components.js"></script>
     <script type="module" src=".js/header.js"></script>
     <script type="module" src=".js/profile.js"></script>
 </head>
+
 <body>
-    <div id="header-placeholder"></div>
-    <main class="profile-main">
-        <div class="divider5"></div>
-        <div class="profile-container">
-            <h1 class="profile-title">PRO<span class="highlight">FILE</span></h1>
-            <div class="profile-avatar">
-                <img src="assets/icons/logo-nobg.png" alt="Bake King Logo">
-            </div>
-            <div class="profile-grid">
-                <section class="profile-section">
-                    <h2 class="section-title">PERSONAL DETAILS</h2>
-                    <div class="field-group">
-                        <label>Email</label>
-                        <div class="input-container">
-                            <small class="input-hint">This is the e-mail that will receive notifications</small>
-                            <input type="email" id="profileEmail" value="sampleemail!@gmail.com" disabled>
-                            <button class="edit-icon-btn" onclick="toggleEdit('profileEmail')">
-                                <img src="assets/icons/pencil.png" alt="Edit">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <label>Password</label>
-                        <div class="input-container">
-                            <input type="password" id="profilePassword" value="s****************h" disabled>
-                            <button class="edit-icon-btn" onclick="toggleEdit('profilePassword')">
-                                <img src="assets/icons/pencil.png" alt="Edit">
-                            </button>
-                        </div>
-                    </div>
-                </section>
-                <section class="profile-section">
-                    <h2 class="section-title">ORDERS</h2>
-                    <div class="nav-links-container">
-                        <button class="nav-row" onclick="location.href='current-orders.html'">
-                            <span>My Current Orders</span>
-                            <img src="assets/icons/right-up.png" class="arrow-icon">
-                        </button>
-                        <button class="nav-row" onclick="location.href='order-history.html'">
-                            <span>Order History</span>
-                            <img src="assets/icons/right-up.png" class="arrow-icon">
-                        </button>
-                        <button class="nav-row" onclick="location.href='terms-policies.html'">
-                            <span>Privacy Policies and Terms</span>
-                            <img src="assets/icons/right-up.png" class="arrow-icon">
-                        </button>
-                    </div>
-                    <button id="logoutBtn" class="logout-btn-full">LOGOUT</button>
-                </section>
-            </div>
-        </div>
-    </main>
+<div id="header-placeholder"></div>
+<main class="profile-main">
     <div class="divider5"></div>
-    <div id="footer-placeholder"></div>
+    <div class="profile-container">
+        <h1 class="profile-title">PRO<span class="highlight">FILE</span></h1>
+
+        <div class="profile-avatar">
+            <img src="assets/icons/logo-nobg.png" alt="Bake King Logo">
+        </div>
+
+        <div class="profile-grid">
+            <section class="profile-section">
+                <h2 class="section-title">ACCOUNT INFORMATION</h2>
+
+                <div class="field-group">
+                    <label>Email Address</label>
+                    <span class="input-hint">Used for notifications and login</span>
+
+                    <div class="input-container">
+                        <input type="email" id="profileEmail" value="sampleemail@gmail.com" readonly>
+                        <button class="edit-icon-btn" onclick="toggleEdit('profileEmail')">
+                            <img src="assets/icons/pencil.png" alt="Edit">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label>Password</label>
+                    <span class="input-hint">Click edit to change password</span>
+
+                    <div class="input-container">
+                        <input type="password" id="profilePassword" value="************" readonly>
+                        <button class="edit-icon-btn" onclick="toggleEdit('profilePassword')">
+                            <img src="assets/icons/pencil.png" alt="Edit">
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-section">
+                <h2 class="section-title">ORDERS & SETTINGS</h2>
+
+                <button class="nav-row" onclick="location.href='current-orders.html'">
+                    <span>My Current Orders</span>
+                    <img src="assets/icons/right-up.png" class="arrow-icon">
+                </button>
+
+                <button class="nav-row" onclick="location.href='order-history.html'">
+                    <span>Order History</span>
+                    <img src="assets/icons/right-up.png" class="arrow-icon">
+                </button>
+
+                <button class="nav-row" onclick="location.href='terms-policies.html'">
+                    <span>Privacy & Terms</span>
+                    <img src="assets/icons/right-up.png" class="arrow-icon">
+                </button>
+
+                <button id="logoutBtn" class="logout-btn-full">
+                    LOGOUT
+                </button>
+            </section>
+        </div>
+    </div>
+    <div class="divider5"></div>
+</main>
+<div id="footer-placeholder"></div>
 </body>
 </html>
