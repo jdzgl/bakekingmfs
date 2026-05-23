@@ -395,35 +395,66 @@ async function populateStep2() {
 }
 
 function populateAddons(addons) {
-    const list    = document.getElementById('pdmAddonList');
+    const list = document.getElementById('pdmAddonList');
     const noneTag = document.getElementById('pdmAddonNoneTag');
+
     if (!list) return;
+
     list.innerHTML = '';
-    selectedAddon  = null;
+    selectedAddon = null;
+
     if (noneTag) noneTag.textContent = 'NONE';
 
-    const real = addons.filter(a => a.type && a.type.toLowerCase() !== 'none' && Number(a.price) > 0);
-    if (!real.length) { list.style.display = 'none'; return; }
-    list.style.display = '';
+    const real = (addons || []).filter(a =>
+        a.type &&
+        a.type.toLowerCase() !== 'none' &&
+        Number(a.price) > 0
+    );
 
-    real.forEach(addon => {
+    if (!real.length) {
+        list.style.display = 'none';
+        return;
+    }
+
+    list.style.display = 'flex';
+
+    real.forEach((addon, index) => {
         const btn = document.createElement('button');
-        btn.className = 'pdm-addon-btn';
+
+        btn.className = 'pdm-addon-card';
         btn.type = 'button';
-        btn.innerHTML = `<span>${addon.type}</span><span class="pdm-addon-price-tag">+ ₱${Number(addon.price).toLocaleString()}</span>`;
+
+        btn.innerHTML = `
+            <div class="pdm-addon-left">
+                <span class="pdm-addon-title">${addon.type}</span>
+                <span class="pdm-addon-sub">Optional upgrade</span>
+            </div>
+
+            <div class="pdm-addon-right">
+                <span class="pdm-addon-price">+ ₱${Number(addon.price).toLocaleString()}</span>
+                <span class="pdm-addon-check">✓</span>
+            </div>
+        `;
+
         btn.addEventListener('click', () => {
-            if (selectedAddon && selectedAddon.type === addon.type) {
+
+            const isActive = btn.classList.contains('pdm-addon-active');
+
+            document.querySelectorAll('.pdm-addon-card')
+                .forEach(b => b.classList.remove('pdm-addon-active'));
+
+            if (isActive) {
                 selectedAddon = null;
-                btn.classList.remove('pdm-addon-active');
                 if (noneTag) noneTag.textContent = 'NONE';
             } else {
-                document.querySelectorAll('.pdm-addon-btn').forEach(b => b.classList.remove('pdm-addon-active'));
                 btn.classList.add('pdm-addon-active');
                 selectedAddon = addon;
                 if (noneTag) noneTag.textContent = addon.type;
             }
+
             updateS2Price();
         });
+
         list.appendChild(btn);
     });
 }
