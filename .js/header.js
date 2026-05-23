@@ -22,16 +22,30 @@ function openSidebar() {
     const sidebar = document.getElementById('navSidebar');
     const overlay = document.getElementById('sidebarOverlay');
     const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
     if (!sidebar || !overlay) return;
 
     sidebar.style.display = 'flex';
     overlay.style.display = 'block';
+    
     requestAnimationFrame(() => {
         sidebar.classList.add('is-open');
         overlay.classList.add('is-visible');
-        if (hamburgerBtn) hamburgerBtn.classList.add('is-open');
+        
+        // Dynamic accessibility state overrides
+        sidebar.removeAttribute('inert');
+        sidebar.setAttribute('aria-hidden', 'false');
+        
+        if (hamburgerBtn) {
+            hamburgerBtn.classList.add('is-open');
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+        }
+        
         document.body.style.overflow = 'hidden';
         isSidebarOpen = true;
+
+        // Shift user focus rules natively inside the viewport frame safely
+        if (closeSidebarBtn) closeSidebarBtn.focus();
     });
     history.pushState({ sidebarOpen: true }, '');
 }
@@ -44,9 +58,20 @@ function closeSidebar() {
 
     sidebar.classList.remove('is-open');
     overlay.classList.remove('is-visible');
-    if (hamburgerBtn) hamburgerBtn.classList.remove('is-open');
+    
+    // Completely hide the tree from background screen-reader loops
+    sidebar.setAttribute('inert', '');
+    sidebar.setAttribute('aria-hidden', 'true');
+    
+    if (hamburgerBtn) {
+        hamburgerBtn.classList.remove('is-open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        hamburgerBtn.focus(); // Return mechanical context focus safely
+    }
+    
     document.body.style.overflow = '';
     isSidebarOpen = false;
+    
     setTimeout(() => {
         if (!isSidebarOpen) {
             sidebar.style.display = 'none';
@@ -97,6 +122,8 @@ onAuthStateChanged(auth, async (user) => {
     const loginBlock = document.getElementById('sidebarLoginBlock');
     const userBlock = document.getElementById('sidebarUserBlock');
     const userNameEl = document.getElementById('sidebarUserName');
+    const logoutBtn = document.getElementById('sidebarLogoutBtn');
+    const logoutDivider = document.getElementById('logoutDivider');
 
     if (cartUnsub) cartUnsub();
     if (notifUnsub) notifUnsub();
@@ -104,6 +131,9 @@ onAuthStateChanged(auth, async (user) => {
     if (user) {
         if (loginBlock) loginBlock.style.display = 'none';
         if (userBlock) userBlock.style.display = 'flex';
+        if (logoutBtn) logoutBtn.style.display = 'block';
+        if (logoutDivider) logoutDivider.style.display = 'block';
+        
         const name = await getUserName(user);
         if (userNameEl) userNameEl.textContent = name ? `Hello, ${name}!` : "Hello!";
 
@@ -123,6 +153,9 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         if (loginBlock) loginBlock.style.display = 'flex';
         if (userBlock) userBlock.style.display = 'none';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+        if (logoutDivider) logoutDivider.style.display = 'none';
+        
         updateCartBadges(0);
         updateNotifBadges(0);
     }
@@ -130,24 +163,39 @@ onAuthStateChanged(auth, async (user) => {
 
 function attachListeners() {
     const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
     const logoutBtn = document.getElementById('sidebarLogoutBtn');
     const overlay = document.getElementById('sidebarOverlay');
+    const sidebar = document.getElementById('navSidebar');
+
+    // Initialize raw baseline closed accessibility attributes accurately
+    if (sidebar && !sidebar.classList.contains('is-open')) {
+        sidebar.setAttribute('inert', '');
+        sidebar.setAttribute('aria-hidden', 'true');
+    }
 
     if (hamburgerBtn) hamburgerBtn.onclick = (e) => { e.preventDefault(); openSidebar(); };
+    if (closeSidebarBtn) closeSidebarBtn.onclick = (e) => { e.preventDefault(); closeSidebar(); };
     if (overlay) overlay.onclick = closeSidebar;
     
     document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.onclick = closeSidebar;
+        // Prevent breaking logout processing handlers accidentally
+        if (!link.classList.contains('sidebar-logout-btn')) {
+            link.onclick = closeSidebar;
+        }
     });
 
     if (logoutBtn) {
-        logoutBtn.onclick = async () => {
+        logoutBtn.onclick = async (e) => {
+            e.preventDefault();
+            closeSidebar();
             await signOut(auth);
             window.location.href = 'login.html';
         };
     }
 }
 
+// Watch DOM mutations to bind dynamic interactive triggers instantly
 const injectionObserver = new MutationObserver(() => {
     if (document.getElementById('navSidebar')) {
         attachListeners();
@@ -156,7 +204,11 @@ const injectionObserver = new MutationObserver(() => {
 });
 injectionObserver.observe(document.body, { childList: true, subtree: true });
 
+// Listen for browser navigation changes or ESC key closures
 window.addEventListener('popstate', () => { if (isSidebarOpen) closeSidebar(); });
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isSidebarOpen) closeSidebar();
+});
 
 window.handleAddTocart = async function(productData) {
     const user = auth.currentUser;
@@ -171,6 +223,6 @@ window.handleAddTocart = async function(productData) {
         });
         if (typeof showCheckoutToast === 'function') showCheckoutToast("Item added to cart!");
     } catch (error) {
-        console.error("Cart error:", error);
+        console.error("Cart registration error:", error);
     }
 };
