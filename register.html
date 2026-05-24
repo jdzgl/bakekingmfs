@@ -5,46 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bake King - Create Account</title>
     
-    <link rel="stylesheet" href=".css/register.css">
+    <link rel="stylesheet" href=".css/login.css">
     <script type="module" src=".js/register.js"></script>
 </head>
 <body class="login-page">
+
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
     <main class="login-container">
-        <div class="login-brand">
-            <img src="assets/icons/logo-nobg.png" alt="Bake King Logo" class="large-logo">
-        </div>
-        <section class="login-form-card register-form-card">
-            <h1 class="login-title">SIGN UP</h1>
-            <p class="login-subtitle">Create your Bake King account</p>
-            <form id="registerForm">
-                <div class="input-group">
+        
+        <header class="brand-header-block">
+            <div class="logo-wrapper">
+                <img src="assets/icons/logo-nobg.png" alt="Bake King Logo" class="brand-logo">
+            </div>
+            <h1 class="brand-name">BAKE <span class="highlight">KING</span></h1>
+            <p class="brand-tagline">Creating quality equipment for you</p>
+        </header>
+
+        <section class="login-form-panel">
+            <header class="form-header">
+                <span class="form-eyebrow">START HERE</span>
+                <h2 class="form-title">SIGN UP</h2>
+                <p class="form-subtitle">Create your Bake King account</p>
+            </header>
+
+            <form id="registerForm" novalidate>
+                
+                <div class="field-group">
                     <label for="name">Full Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Enter your full name"
-                        required
-                        autocomplete="name"
-                    >
+                    <div class="field-wrap">
+                        <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            required
+                            autocomplete="name"
+                        >
+                    </div>
+                    <span class="error-message-inline"></span>
                 </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Enter your email here"
-                        required
-                        autocomplete="email"
-                    >
+
+                <div class="field-group">
+                    <label for="email">Email Address</label>
+                    <div class="field-wrap">
+                        <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email here"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                    <span class="error-message-inline"></span>
                 </div>
-                <div class="divider-line">
-                    <hr><span>set a password</span><hr>
+
+                <div class="divider-line" style="display: flex; align-items: center; margin: 16px 0 24px; gap: 12px;">
+                    <hr style="flex: 1; border: none; border-top: 1px solid var(--beige-dk);">
+                    <span style="font-size: 11px; font-family: 'Satoshi-Bold', sans-serif; text-transform: uppercase; color: var(--gray); letter-spacing: 1px;">set a password</span>
+                    <hr style="flex: 1; border: none; border-top: 1px solid var(--beige-dk);">
                 </div>
-                <div class="input-group">
+
+                <div class="field-group">
                     <label for="password">Password</label>
-                    <div class="password-wrapper">
+                    <div class="field-wrap">
+                        <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
                         <input
                             type="password"
                             id="password"
@@ -53,18 +88,23 @@
                             required
                             autocomplete="new-password"
                         >
-                        <button type="button" class="toggle-password" data-target="password" aria-label="Show password">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                        <button type="button" class="pw-toggle" data-target="password" aria-label="Show password">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                             </svg>
                         </button>
                     </div>
-                    <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
-                    <span class="strength-label" id="strengthLabel"></span>
+                    <div class="strength-bar" style="height: 4px; background: #EFEFEF; border-radius: 2px; margin-top: 8px; overflow: hidden;"><div class="strength-fill" id="strengthFill" style="height: 100%; width: 0%; transition: width 0.3s ease;"></div></div>
+                    <span class="strength-label" id="strengthLabel" style="display: block; font-size: 11px; font-family: 'Satoshi-Bold'; margin-top: 5px; text-align: right; color: var(--gray);"></span>
                 </div>
-                <div class="input-group">
+
+                <div class="field-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <div class="password-wrapper">
+                    <div class="field-wrap">
+                        <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
                         <input
                             type="password"
                             id="confirmPassword"
@@ -73,49 +113,62 @@
                             required
                             autocomplete="new-password"
                         >
-                        <button type="button" class="toggle-password" data-target="confirmPassword" aria-label="Show confirm password">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                        <button type="button" class="pw-toggle" data-target="confirmPassword" aria-label="Show confirm password">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                             </svg>
                         </button>
                     </div>
-                    <span class="match-msg" id="matchMsg"></span>
+                    <span class="match-msg error-message-inline" id="matchMsg"></span>
                 </div>
-                <p class="terms-link-text">
+
+                <p class="terms-note">
                     By creating an account, you agree to our
                     <a href="javascript:void(0)" id="openTerms">Terms and Conditions</a>.
                 </p>
-                <button type="submit" id="registerBtn" class="login-btn">CREATE ACCOUNT</button>
+
+                <button type="submit" id="registerBtn" class="login-btn" disabled>
+                    <span class="btn-text">CREATE ACCOUNT</span>
+                    <svg class="btn-arrow" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
             </form>
-            <p class="signin-redirect">
-                Already have an account? <a href="login.html">Log In</a>
-            </p>
+
+            <footer class="signup-link">
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </footer>
         </section>
     </main>
-    <div id="termsModal" class="modal">
-        <div class="modal-content">
-            <h2 class="section-title">TERMS AND <span class="highlight">CONDITIONS</span></h2>
-            <div class="terms-scroll-box">
+
+    <div id="termsModal" class="modal-backdrop" style="display: none;" aria-hidden="true" inert>
+        <div class="modal-box">
+            <button type="button" class="modal-close-btn" id="closeTermsBtn" aria-label="Close dialogue window">×</button>
+            
+            <h2 class="modal-title">TERMS AND <span class="modal-highlight">CONDITIONS</span></h2>
+            
+            <div class="terms-scroll" tabindex="0">
                 <h3>1. Acceptance of Terms</h3>
                 <p>By accessing Bake King Metal Fabrication Services, you agree to comply with our service standards and purchase policies.</p>
-                <h3>2. Equipment Warranty</h3>
-                <p>We provide a 1-year service warranty on ovens, bread slicers, and rollers covering motor and mechanical components. Mixers come with a 7-day motor replacement and 1-year service warranty. Wear-and-tear items such as bankas, stainless tables, tray racks, and crushers carry no warranty.</p>
-                <h3>3. Shipping and Delivery</h3>
-                <p>We offer nationwide shipping and delivery. Delivery fees are determined based on your province and city.</p>
-                <h3>4. Payment Methods</h3>
-                <p>We accept Cash on Delivery (COD) and Bank Transfer only. Installment payments are not available at this time.</p>
-                <h3>5. Custom Orders</h3>
-                <p>All items are customizable to your specific preferences. Confirmation of your invoice is required before fabrication begins.</p>
-                <h3>6. Account Responsibility</h3>
-                <p>You are responsible for keeping your account credentials secure. Bake King is not liable for unauthorized access resulting from your failure to protect your login information.</p>
+                <h3>2. Eligibility</h3>
+                <p>By using this website, you confirm that you are at least eighteen (18) years of age, or that you are using the site under the supervision of a parent or legal guardian.</p>
+                <h3>3. Products and Pricing</h3>
+                <p>All product descriptions, images, and prices are subject to change without notice. In the event of a pricing error, we reserve the right to cancel any affected orders.</p>
+                <h3>4. Shipping and Delivery</h3>
+                <p>We ship to addresses within the Philippines. Delivery times are estimates and are not guaranteed. We are not liable for delays caused by courier services, weather, or other circumstances beyond our control.</p>
+                <h3>5. Privacy</h3>
+                <p>We are committed to protecting your personal information in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173).</p>
+                <h3>6. Limitation of Liability</h3>
+                <p>To the fullest extent permitted by law, we shall not be liable for any indirect, incidental, or consequential damages arising from the use of our website or products.</p>
+                <h3>7. Governing Law</h3>
+                <p>These Terms and Conditions shall be governed by the laws of the Republic of the Philippines.</p>
+                <p style="margin-top:20px;font-style:italic;">By using this website, you acknowledge that you have read, understood, and agreed to these Terms and Conditions.</p>
             </div>
-            <div class="modal-footer">
-                <button id="acceptTerms" class="accept-btn">I ACCEPT</button>
-            </div>
+            
+            <button type="button" id="acceptTerms" class="accept-btn">I ACCEPT AND CONTINUE</button>
         </div>
     </div>
-    <footer>
-        <p class="copyright">Bake King Metal Fabrication Services © 2018</p>
-    </footer>
+
 </body>
 </html>

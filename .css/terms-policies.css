@@ -19,12 +19,12 @@ body {
     width: 100%;
 }
 
+/* ── NEOBRUTALISM DIVISION ASSETS ── */
 .divider5 {
     width: 100%;
     height: 25px !important;
     background-image: url('../assets/dividers/5.png');
     background-repeat: repeat-x;
-    background-size: auto 130px;
     position: relative;
     display: flex;
 }
@@ -36,6 +36,7 @@ body {
     position: relative;
 }
 
+/* ── BACK ACTION BUTTON ── */
 .back-btn {
     display: inline-block;
     margin-bottom: 30px;
@@ -43,126 +44,171 @@ body {
 }
 
 .back-btn:hover {
-    transform: scale(1.2) translateX(-5px);
+    transform: scale(1.15) translateX(-4px);
 }
 
 .back-btn:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
 }
 
+/* ── HEADLINE CORE BRAND TYPOGRAPHY ── */
 .page-title {
     font-family: 'Integral-CF-Bold', sans-serif;
-    font-size: 48px;
+    font-size: 46px;
     color: var(--dark-brown);
     text-align: center;
     margin-bottom: 50px;
-    transition: transform 0.5s ease;
+    text-transform: uppercase;
 }
 
 .page-title .highlight {
     color: var(--primary-orange);
     -webkit-text-stroke: 1.5px var(--dark-brown);
     display: inline-block;
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .page-title:hover .highlight {
-    transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.05) rotate(-2deg);
     color: var(--dark-orange);
 }
 
+/* ── CONTAINER GRID STRUCTURE ── */
 .policies-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
+    align-items: start;
 }
 
 .policy-column .section-title {
-    color: var(--primary-orange);
+    color: var(--dark-brown);
     font-family: 'Integral-CF-Bold', sans-serif;
-    font-size: 24px;
-    font-weight: 800;
+    font-size: 22px;
+    font-weight: 700;
     margin-bottom: 20px;
     text-transform: uppercase;
     transition: transform 0.3s ease;
 }
 
 .policy-column:hover .section-title {
-    transform: scale(1.02) rotate(-1deg);
+    transform: translateX(4px);
+    color: var(--primary-orange);
 }
 
+/* ── THE HARD NEOBRUTALIST CARD PROFILE ── */
 .policy-card {
-    background: var(--beige);
-    border: 2px solid var(--primary-orange);
-    border-radius: 10px;
-    padding: 30px;
-    height: 500px; 
+    background: #FFFFFF; /* High contrast clean background card element */
+    border: 3px solid var(--dark-brown); 
+    border-radius: 16px;
+    padding: 35px 25px 35px 35px;
+    height: 540px; 
     overflow-y: auto;
     font-family: 'Satoshi', sans-serif;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: -5px 5px 0px var(--beige);
+    box-shadow: -8px 8px 0px var(--dark-brown); /* Clean sharp neobrutalist offset shadow block */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    scroll-behavior: smooth;
 }
 
 .policy-card:hover {
-    transform: translateY(-8px);
-    box-shadow: -10px 10px 0px var(--primary-orange);
+    transform: translate(2px, -2px);
+    box-shadow: -12px 12px 0px var(--primary-orange);
+    border-color: var(--dark-brown);
 }
 
-.policy-card:active {
-    transform: scale(0.98);
-}
-
+/* ── SCROLLBAR PROFILE HANDLING ── */
 .policy-card::-webkit-scrollbar {
     width: 8px;
 }
 
+.policy-card::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 15px 0;
+}
+
 .policy-card::-webkit-scrollbar-thumb {
+    background: var(--dark-brown);
+    border-radius: 20px;
+}
+
+.policy-card::-webkit-scrollbar-thumb:hover {
     background: var(--primary-orange);
-    border-radius: 10px;
+}
+
+/* ── TEXT & SPACING INLINE WRAPPERS ── */
+.policy-intro {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px dashed rgba(43, 20, 16, 0.2);
+}
+
+.policy-item {
+    margin-bottom: 25px;
+}
+
+.policy-item:last-child {
+    margin-bottom: 0;
 }
 
 .policy-card h3 {
     color: var(--primary-orange);
     font-size: 16px;
-    margin: 25px 0 10px 0;
+    margin: 0 0 8px 0;
     font-weight: 900;
     font-family: 'Satoshi-Black', sans-serif;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .policy-card p {
     font-family: 'Satoshi', sans-serif;
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.7;
     color: var(--dark-brown);
-    margin-bottom: 15px;
 }
 
-.divider5 {
-    height: 5px;
-    background-color: var(--primary-orange);
-    width: 100%;
-    margin-top: 60px;
+.policy-card strong {
+    font-family: 'Satoshi-Black', sans-serif;
+    color: var(--dark-brown);
 }
 
+.policy-card a {
+    color: var(--primary-orange);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.policy-card a:hover {
+    text-decoration: underline;
+}
+
+/* ── RESPONSIVE VIEWPORT TRANSITIONS ── */
 @media (max-width: 1024px) {
-    .policies-grid { grid-template-columns: 1fr; gap: 50px; }
-    .page-title { font-size: 36px; }
+    .policies-grid { 
+        grid-template-columns: 1fr; 
+        gap: 50px; 
+    }
+    .page-title { font-size: 38px; }
+    .policy-card { height: 460px; }
 }
 
 @media (max-width: 768px) {
-    .policies-main-container { padding: 40px 20px; }
-    .page-title { font-size: 28px; }
-    .policy-column .section-title { font-size: 20px; text-align: center; }
-    .policy-card { height: 400px; }
+    .policies-main-container { padding: 40px 16px; }
+    .page-title { font-size: 32px; }
+    .policy-column .section-title { font-size: 20px; text-align: left; }
 }
 
 @media (max-width: 480px) {
-    .page-title { font-size: 24px; }
-    .policy-card { padding: 20px; height: 350px; }
+    .page-title { font-size: 26px; }
+    .policy-card { 
+        padding: 20px; 
+        height: 380px; 
+        box-shadow: -5px 5px 0px var(--dark-brown);
+    }
     .back-btn img { width: 25px; }
 }
 
+/* ── TYPOGRAPHY RENDERING ASSETS ── */
 @font-face {
     font-family: 'Satoshi';
     src: url('../assets/fonts/satoshi/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf') format('opentype');
@@ -184,5 +230,5 @@ body {
     src: url('../assets/fonts/integral-cf/Demo_Fonts/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
     font-weight: 700;
     font-display: swap;
-    font-style: bold;
+    font-style: normal;
 }
